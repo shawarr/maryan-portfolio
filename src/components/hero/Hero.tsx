@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState, Component, type ReactNode } from 'react'
 import {
   motion,
   useScroll,
@@ -10,10 +10,35 @@ import {
 import gsap from 'gsap'
 import { IDENTITY } from '../../data/content'
 import KineticTitle from './KineticTitle'
+import TechnicalDrawing from '../TechnicalDrawing'
 import type { HeroAnim } from './AssemblyScene'
 
 // lazy-load the three.js bundle so first paint isn't blocked by it
 const AssemblyScene = lazy(() => import('./AssemblyScene'))
+
+/* Static blueprint shown when WebGL is unavailable or crashes (old iOS
+   Safari has no WebGL2; newer ones sometimes drop the context under
+   memory pressure) — the hero never renders empty. */
+function StaticHeroFallback() {
+  return (
+    <div className="absolute inset-0 flex items-center justify-center" aria-hidden>
+      <TechnicalDrawing kind="gear" reduced={false} className="h-[46vh] w-auto max-w-[88vw] opacity-70" />
+      <span className="absolute bottom-[16vh] font-mono text-[9px] tracking-[0.3em] text-ghost">
+        FIG. 001-S — STATIC VIEW
+      </span>
+    </div>
+  )
+}
+
+class SceneBoundary extends Component<{ fallback: ReactNode; children: ReactNode }, { failed: boolean }> {
+  state = { failed: false }
+  static getDerivedStateFromError() {
+    return { failed: true }
+  }
+  render() {
+    return this.state.failed ? this.props.fallback : this.props.children
+  }
+}
 
 export default function Hero({
   started,
@@ -26,6 +51,7 @@ export default function Hero({
 }) {
   const sectionRef = useRef<HTMLElement>(null)
   const anim = useRef<HeroAnim>({ intro: reduced ? 0 : 1, explode: 0 })
+  const [glFailed, setGlFailed] = useState(false)
 
   /* scroll through this 260vh section drives the exploded view */
   const { scrollYProgress } = useScroll({
@@ -104,11 +130,22 @@ export default function Hero({
           </text>
         </svg>
 
-        {/* 3D canvas */}
+        {/* 3D canvas — falls back to a static blueprint if WebGL fails */}
         <div className="absolute inset-0">
-          <Suspense fallback={null}>
-            <AssemblyScene anim={anim} reduced={reduced} mobile={mobile} />
-          </Suspense>
+          {glFailed ? (
+            <StaticHeroFallback />
+          ) : (
+            <SceneBoundary fallback={<StaticHeroFallback />}>
+              <Suspense fallback={null}>
+                <AssemblyScene
+                  anim={anim}
+                  reduced={reduced}
+                  mobile={mobile}
+                  onFail={() => setGlFailed(true)}
+                />
+              </Suspense>
+            </SceneBoundary>
+          )}
         </div>
 
         {/* headline overlay */}

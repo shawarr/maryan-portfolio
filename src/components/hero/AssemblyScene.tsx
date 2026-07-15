@@ -17,9 +17,26 @@ export type HeroAnim = {
   explode: number
 }
 
-const STEEL = { color: '#aebbc4', metalness: 0.9, roughness: 0.28 }
-const GRAPHITE = { color: '#161e26', metalness: 0.7, roughness: 0.45 }
-const ANODIZED = { color: '#ff6a00', metalness: 0.55, roughness: 0.32 }
+type Mats = Record<'steel' | 'graphite' | 'anodized', {
+  color: string
+  metalness: number
+  roughness: number
+}>
+
+/* Desktop gets high-metalness surfaces lit by a procedural environment map.
+   iOS Safari renders that env map unreliably (half-float framebuffers), and
+   metallic surfaces without an env map go black — so mobile uses lower
+   metalness and is lit by direct lights only. */
+const DESKTOP_MATS: Mats = {
+  steel: { color: '#aebbc4', metalness: 0.9, roughness: 0.28 },
+  graphite: { color: '#161e26', metalness: 0.7, roughness: 0.45 },
+  anodized: { color: '#ff6a00', metalness: 0.55, roughness: 0.32 },
+}
+const MOBILE_MATS: Mats = {
+  steel: { color: '#b8c6d0', metalness: 0.35, roughness: 0.42 },
+  graphite: { color: '#1c2630', metalness: 0.25, roughness: 0.55 },
+  anodized: { color: '#ff6a00', metalness: 0.3, roughness: 0.45 },
+}
 
 /* ---------- parametric gear geometry ---------- */
 function useGearGeometry(teeth: number, radius: number, depth: number, holeR: number) {
@@ -145,37 +162,46 @@ function Part({
 }
 
 /* ---------- bolt ---------- */
-function Bolt() {
+function Bolt({ m }: { m: Mats }) {
   return (
     <group>
       <mesh position={[0, 0, 0.05]}>
         <cylinderGeometry args={[0.085, 0.085, 0.07, 6]} />
-        <meshStandardMaterial {...STEEL} />
+        <meshStandardMaterial {...m.steel} />
       </mesh>
       <mesh position={[0, 0, -0.1]}>
         <cylinderGeometry args={[0.04, 0.04, 0.26, 12]} />
-        <meshStandardMaterial {...STEEL} roughness={0.4} />
+        <meshStandardMaterial {...m.steel} roughness={0.4} />
       </mesh>
     </group>
   )
 }
 
 /* ---------- the full placeholder assembly ---------- */
-function GearboxAssembly({ anim, reduced }: { anim: RefObject<HeroAnim>; reduced: boolean }) {
+function GearboxAssembly({
+  anim,
+  reduced,
+  m,
+}: {
+  anim: RefObject<HeroAnim>
+  reduced: boolean
+  m: Mats
+}) {
   const root = useRef<THREE.Group>(null)
   const mainGearGeo = useGearGeometry(20, 0.95, 0.26, 0.16)
   const pinionGeo = useGearGeometry(11, 0.5, 0.26, 0.1)
 
-  useFrame((state) => {
+  useFrame((state, dt) => {
     const g = root.current
     if (!g) return
     const t = state.clock.elapsedTime
+    const step = Math.min(dt, 0.05) // clamp tab-switch spikes
     const { explode } = anim.current
     // idle auto-rotation + mouse parallax, damped
     const targetY = (reduced ? 0 : Math.sin(t * 0.18) * 0.35) + state.pointer.x * 0.18 + 0.15
     const targetX = -state.pointer.y * 0.1 + 0.12 + explode * 0.12
-    g.rotation.y = THREE.MathUtils.damp(g.rotation.y, targetY, 2.4, state.clock.getDelta() || 0.016)
-    g.rotation.x = THREE.MathUtils.damp(g.rotation.x, targetX, 2.4, 0.016)
+    g.rotation.y = THREE.MathUtils.damp(g.rotation.y, targetY, 2.4, step)
+    g.rotation.x = THREE.MathUtils.damp(g.rotation.x, targetX, 2.4, step)
     g.position.y = reduced ? 0 : Math.sin(t * 0.5) * 0.05
   })
 
@@ -194,7 +220,7 @@ function GearboxAssembly({ anim, reduced }: { anim: RefObject<HeroAnim>; reduced
       {/* back housing plate */}
       <Part anim={anim} pos={[0, 0, -0.55]} off={[0, -0.3, -1.7]} tumble={[0.3, 0.2, 0.1]}>
         <RoundedBox args={[3.3, 2.4, 0.14]} radius={0.06}>
-          <meshStandardMaterial {...GRAPHITE} />
+          <meshStandardMaterial {...m.graphite} />
           <Edges color="#2a3d4e" />
         </RoundedBox>
       </Part>
@@ -209,7 +235,7 @@ function GearboxAssembly({ anim, reduced }: { anim: RefObject<HeroAnim>; reduced
         labelSide="left"
       >
         <mesh geometry={mainGearGeo}>
-          <meshStandardMaterial {...STEEL} />
+          <meshStandardMaterial {...m.steel} />
         </mesh>
       </Part>
 
@@ -222,7 +248,7 @@ function GearboxAssembly({ anim, reduced }: { anim: RefObject<HeroAnim>; reduced
         label="PINION — 11T · ±0.02mm"
       >
         <mesh geometry={pinionGeo}>
-          <meshStandardMaterial {...ANODIZED} />
+          <meshStandardMaterial {...m.anodized} />
         </mesh>
       </Part>
 
@@ -237,12 +263,12 @@ function GearboxAssembly({ anim, reduced }: { anim: RefObject<HeroAnim>; reduced
       >
         <mesh rotation={[Math.PI / 2, 0, 0]}>
           <cylinderGeometry args={[0.14, 0.14, 1.8, 24]} />
-          <meshStandardMaterial {...STEEL} roughness={0.2} />
+          <meshStandardMaterial {...m.steel} roughness={0.2} />
         </mesh>
         {/* keyway collar */}
         <mesh position={[0, 0, 0.55]} rotation={[Math.PI / 2, 0, 0]}>
           <cylinderGeometry args={[0.19, 0.19, 0.1, 24]} />
-          <meshStandardMaterial {...ANODIZED} />
+          <meshStandardMaterial {...m.anodized} />
         </mesh>
       </Part>
 
@@ -250,7 +276,7 @@ function GearboxAssembly({ anim, reduced }: { anim: RefObject<HeroAnim>; reduced
       <Part anim={anim} pos={[0.72, 0.28, 0]} off={[0.5, 0.2, 1.5]} spin={-gearSpin * (20 / 11)}>
         <mesh rotation={[Math.PI / 2, 0, 0]}>
           <cylinderGeometry args={[0.09, 0.09, 1.5, 20]} />
-          <meshStandardMaterial {...STEEL} roughness={0.2} />
+          <meshStandardMaterial {...m.steel} roughness={0.2} />
         </mesh>
       </Part>
 
@@ -264,13 +290,13 @@ function GearboxAssembly({ anim, reduced }: { anim: RefObject<HeroAnim>; reduced
       >
         <mesh>
           <torusGeometry args={[0.21, 0.07, 12, 32]} />
-          <meshStandardMaterial {...STEEL} roughness={0.35} />
+          <meshStandardMaterial {...m.steel} roughness={0.35} />
         </mesh>
       </Part>
       <Part anim={anim} pos={[-0.55, -0.12, -0.72]} off={[0, -1.0, -0.9]}>
         <mesh>
           <torusGeometry args={[0.21, 0.07, 12, 32]} />
-          <meshStandardMaterial {...STEEL} roughness={0.35} />
+          <meshStandardMaterial {...m.steel} roughness={0.35} />
         </mesh>
       </Part>
 
@@ -306,7 +332,7 @@ function GearboxAssembly({ anim, reduced }: { anim: RefObject<HeroAnim>; reduced
           label={i === 1 ? 'M8 HEX BOLT — QTY 6' : undefined}
         >
           <group rotation={[Math.PI / 2, 0, 0]}>
-            <Bolt />
+            <Bolt m={m} />
           </group>
         </Part>
       ))}
@@ -319,10 +345,13 @@ export default function AssemblyScene({
   anim,
   reduced,
   mobile,
+  onFail,
 }: {
   anim: RefObject<HeroAnim>
   reduced: boolean
   mobile: boolean
+  /** called if the WebGL context is lost — parent swaps in a static fallback */
+  onFail?: () => void
 }) {
   return (
     <Canvas
@@ -332,11 +361,23 @@ export default function AssemblyScene({
       style={{ pointerEvents: 'none' }}
       eventSource={document.body}
       eventPrefix="client"
+      onCreated={({ gl }) => {
+        gl.domElement.addEventListener(
+          'webglcontextlost',
+          (e) => {
+            e.preventDefault()
+            onFail?.()
+          },
+          false,
+        )
+      }}
     >
-      <ambientLight intensity={0.25} />
-      <directionalLight position={[4, 6, 5]} intensity={0.8} color="#dfeaf2" />
+      <ambientLight intensity={mobile ? 0.5 : 0.25} />
+      <hemisphereLight args={['#dfeaf2', '#0b0f13', mobile ? 1.2 : 0.4]} />
+      <directionalLight position={[4, 6, 5]} intensity={mobile ? 2.2 : 0.8} color="#dfeaf2" />
+      {mobile && <directionalLight position={[-4, 2, -3]} intensity={0.9} color="#4fd1ff" />}
       <pointLight position={[-5, -2, 3]} intensity={12} color="#ff6a00" distance={12} />
-      <GearboxAssembly anim={anim} reduced={reduced} />
+      <GearboxAssembly anim={anim} reduced={reduced} m={mobile ? MOBILE_MATS : DESKTOP_MATS} />
       {!mobile && (
         <Grid
           position={[0, -2.1, 0]}
@@ -352,12 +393,16 @@ export default function AssemblyScene({
           infiniteGrid
         />
       )}
-      {/* local, procedural environment map — no network fetch */}
-      <Environment resolution={128}>
-        <Lightformer intensity={1.8} position={[0, 4, 5]} scale={[9, 3, 1]} />
-        <Lightformer intensity={0.9} color="#4fd1ff" position={[-6, 1, -2]} rotation-y={-Math.PI / 2} scale={[7, 2, 1]} />
-        <Lightformer intensity={1} color="#ff6a00" position={[6, -1, 1]} rotation-y={Math.PI / 2} scale={[6, 2, 1]} />
-      </Environment>
+      {/* local, procedural environment map — no network fetch.
+          Skipped on mobile: iOS Safari handles the required half-float
+          render target unreliably, and mobile is lit directly instead. */}
+      {!mobile && (
+        <Environment resolution={128}>
+          <Lightformer intensity={1.8} position={[0, 4, 5]} scale={[9, 3, 1]} />
+          <Lightformer intensity={0.9} color="#4fd1ff" position={[-6, 1, -2]} rotation-y={-Math.PI / 2} scale={[7, 2, 1]} />
+          <Lightformer intensity={1} color="#ff6a00" position={[6, -1, 1]} rotation-y={Math.PI / 2} scale={[6, 2, 1]} />
+        </Environment>
+      )}
     </Canvas>
   )
 }
