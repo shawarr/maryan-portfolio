@@ -21,7 +21,7 @@ export default function Skills({ reduced }: { reduced: boolean }) {
     <section id="skills" className="relative border-y border-line/60 bg-panel/30 py-28">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <p className="mb-3 font-mono text-[11px] tracking-[0.35em] text-accent">03 / TOOLING</p>
-        <h2 className="mb-12 text-3xl font-medium text-white md:text-4xl">
+        <h2 className="mb-12 text-3xl font-medium text-[#201c22] md:text-4xl">
           Instrument panel<span className="text-accent">.</span>
         </h2>
 
@@ -42,7 +42,7 @@ export default function Skills({ reduced }: { reduced: boolean }) {
               <span className="font-mono text-[9px] tracking-[0.2em] text-ghost">
                 T-{String(i + 1).padStart(2, '0')}
               </span>
-              <h3 className="mt-3 text-sm font-medium text-white transition-colors group-hover:text-accent">
+              <h3 className="mt-3 text-sm font-medium text-[#201c22] transition-colors group-hover:text-accent">
                 {skill.name}
               </h3>
               <p className="mt-0.5 font-mono text-[9px] tracking-[0.15em] text-ghost">{skill.cat}</p>

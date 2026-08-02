@@ -60,7 +60,7 @@ export default function Contact({ reduced }: { reduced: boolean }) {
       <div className="relative mx-auto max-w-3xl px-5 text-center">
         <LockingBolt reduced={reduced} />
         <p className="mb-3 font-mono text-[11px] tracking-[0.35em] text-accent">04 / CONTACT</p>
-        <h2 className="text-3xl font-medium text-white md:text-5xl">
+        <h2 className="text-3xl font-medium text-[#201c22] md:text-5xl">
           Assembly complete<span className="text-accent">.</span>
         </h2>
         <p className="mx-auto mt-5 max-w-md leading-relaxed text-fog">

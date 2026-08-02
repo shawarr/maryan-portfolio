@@ -2,19 +2,19 @@
 
 /* ============================================================
    DESIGN TOKENS — swap the accent color here to retheme
-   the whole site (e.g. #4fd1ff blueprint cyan, #ffd400 hazard
-   yellow). Everything references these variables.
+   the whole site (e.g. #db2777 blush magenta, #ffb3d1 soft
+   blush pink). Everything references these variables.
    ============================================================ */
 @theme {
-  --color-ink: #0b0f13; /* page background — near-black graphite */
-  --color-panel: #10161d; /* raised panel background */
-  --color-line: #1d2833; /* hairline borders / grid lines */
-  --color-fog: #8fa1af; /* muted body text */
-  --color-ghost: #46586675; /* faint technical labels */
-  --color-accent: #ff6a00; /* PRIMARY ACCENT — safety orange */
-  --color-accent-dim: #ff6a0026;
-  --color-blueprint: #4fd1ff; /* secondary accent — blueprint cyan */
-  --color-blueprint-dim: #4fd1ff1f;
+  --color-ink: #ffffff; /* page background — white */
+  --color-panel: #faf6f8; /* raised panel background — soft blush-white */
+  --color-line: #e7dfe4; /* hairline borders / grid lines */
+  --color-fog: #6b6470; /* muted body text — warm slate grey */
+  --color-ghost: #6b647085; /* faint technical labels */
+  --color-accent: #db2777; /* PRIMARY ACCENT — bright/blush pink */
+  --color-accent-dim: #db277726;
+  --color-blueprint: #6b7280; /* secondary accent — graphite grey */
+  --color-blueprint-dim: #6b72801f;
 
   --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
@@ -39,7 +39,7 @@ html.lenis body {
 body {
   margin: 0;
   background: var(--color-ink);
-  color: #e8eef3;
+  color: #201c22;
   font-family: var(--font-sans);
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
@@ -106,7 +106,7 @@ body[data-custom-cursor="true"] button {
   background: repeating-linear-gradient(
     0deg,
     transparent 0 2px,
-    rgba(255, 255, 255, 0.012) 2px 4px
+    rgba(0, 0, 0, 0.02) 2px 4px
   );
 }
 

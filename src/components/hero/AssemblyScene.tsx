@@ -28,14 +28,14 @@ type Mats = Record<'steel' | 'graphite' | 'anodized', {
    metallic surfaces without an env map go black — so mobile uses lower
    metalness and is lit by direct lights only. */
 const DESKTOP_MATS: Mats = {
-  steel: { color: '#aebbc4', metalness: 0.9, roughness: 0.28 },
-  graphite: { color: '#161e26', metalness: 0.7, roughness: 0.45 },
-  anodized: { color: '#ff6a00', metalness: 0.55, roughness: 0.32 },
+  steel: { color: '#c7c1c6', metalness: 0.9, roughness: 0.28 },
+  graphite: { color: '#2b2830', metalness: 0.7, roughness: 0.45 },
+  anodized: { color: '#db2777', metalness: 0.55, roughness: 0.32 },
 }
 const MOBILE_MATS: Mats = {
-  steel: { color: '#b8c6d0', metalness: 0.35, roughness: 0.42 },
-  graphite: { color: '#1c2630', metalness: 0.25, roughness: 0.55 },
-  anodized: { color: '#ff6a00', metalness: 0.3, roughness: 0.45 },
+  steel: { color: '#cec7cc', metalness: 0.35, roughness: 0.42 },
+  graphite: { color: '#332f37', metalness: 0.25, roughness: 0.55 },
+  anodized: { color: '#db2777', metalness: 0.3, roughness: 0.45 },
 }
 
 /* ---------- parametric gear geometry ---------- */
@@ -221,7 +221,7 @@ function GearboxAssembly({
       <Part anim={anim} pos={[0, 0, -0.55]} off={[0, -0.3, -1.7]} tumble={[0.3, 0.2, 0.1]}>
         <RoundedBox args={[3.3, 2.4, 0.14]} radius={0.06}>
           <meshStandardMaterial {...m.graphite} />
-          <Edges color="#2a3d4e" />
+          <Edges color="#4f4a52" />
         </RoundedBox>
       </Part>
 
@@ -310,14 +310,14 @@ function GearboxAssembly({
       >
         <RoundedBox args={[3.3, 2.4, 0.1]} radius={0.06}>
           <meshStandardMaterial
-            color="#4fd1ff"
+            color="#f9a8d4"
             metalness={0.1}
             roughness={0.1}
             transparent
             opacity={0.1}
             depthWrite={false}
           />
-          <Edges color="#4fd1ff" />
+          <Edges color="#f472b6" />
         </RoundedBox>
       </Part>
 
@@ -373,10 +373,10 @@ export default function AssemblyScene({
       }}
     >
       <ambientLight intensity={mobile ? 0.5 : 0.25} />
-      <hemisphereLight args={['#dfeaf2', '#0b0f13', mobile ? 1.2 : 0.4]} />
-      <directionalLight position={[4, 6, 5]} intensity={mobile ? 2.2 : 0.8} color="#dfeaf2" />
-      {mobile && <directionalLight position={[-4, 2, -3]} intensity={0.9} color="#4fd1ff" />}
-      <pointLight position={[-5, -2, 3]} intensity={12} color="#ff6a00" distance={12} />
+      <hemisphereLight args={['#fdf2f6', '#efe9ec', mobile ? 1.2 : 0.4]} />
+      <directionalLight position={[4, 6, 5]} intensity={mobile ? 2.2 : 0.8} color="#fff8fa" />
+      {mobile && <directionalLight position={[-4, 2, -3]} intensity={0.9} color="#d6d0d4" />}
+      <pointLight position={[-5, -2, 3]} intensity={12} color="#ec1f77" distance={12} />
       <GearboxAssembly anim={anim} reduced={reduced} m={mobile ? MOBILE_MATS : DESKTOP_MATS} />
       {!mobile && (
         <Grid
@@ -384,10 +384,10 @@ export default function AssemblyScene({
           args={[24, 24]}
           cellSize={0.5}
           cellThickness={0.5}
-          cellColor="#16222c"
+          cellColor="#e7dfe4"
           sectionSize={2.5}
           sectionThickness={1}
-          sectionColor="#1e3648"
+          sectionColor="#c9c0c6"
           fadeDistance={16}
           fadeStrength={2.5}
           infiniteGrid
@@ -399,8 +399,8 @@ export default function AssemblyScene({
       {!mobile && (
         <Environment resolution={128}>
           <Lightformer intensity={1.8} position={[0, 4, 5]} scale={[9, 3, 1]} />
-          <Lightformer intensity={0.9} color="#4fd1ff" position={[-6, 1, -2]} rotation-y={-Math.PI / 2} scale={[7, 2, 1]} />
-          <Lightformer intensity={1} color="#ff6a00" position={[6, -1, 1]} rotation-y={Math.PI / 2} scale={[6, 2, 1]} />
+          <Lightformer intensity={0.9} color="#d6d0d4" position={[-6, 1, -2]} rotation-y={-Math.PI / 2} scale={[7, 2, 1]} />
+          <Lightformer intensity={1} color="#ec1f77" position={[6, -1, 1]} rotation-y={Math.PI / 2} scale={[6, 2, 1]} />
         </Environment>
       )}
     </Canvas>

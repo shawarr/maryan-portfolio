@@ -28,7 +28,7 @@ export default function Navbar({ ready }: { ready: boolean }) {
               <path d="M0 -9v3M0 6v3M-9 0h3M6 0h3M-6.4 -6.4l2.2 2.2M4.2 4.2l2.2 2.2M6.4 -6.4l-2.2 2.2M-4.2 4.2l-2.2 2.2" />
             </g>
           </svg>
-          <span className="font-mono text-xs tracking-[0.25em] text-white">
+          <span className="font-mono text-xs tracking-[0.25em] text-[#201c22]">
             {IDENTITY.firstName}
             <span className="text-accent">.SYS</span>
           </span>
@@ -39,7 +39,7 @@ export default function Navbar({ ready }: { ready: boolean }) {
               <button
                 onClick={() => scrollToSection(item.id)}
                 data-cursor="link"
-                className="group font-mono text-[11px] tracking-[0.2em] text-fog transition-colors hover:text-white"
+                className="group font-mono text-[11px] tracking-[0.2em] text-fog transition-colors hover:text-[#201c22]"
               >
                 <span className="mr-1.5 text-accent/70 group-hover:text-accent">
                   {item.num}/

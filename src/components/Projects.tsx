@@ -89,7 +89,7 @@ function ProjectCard({
 
         {/* title block */}
         <div className="px-5 py-4">
-          <h3 className="font-mono text-sm font-semibold tracking-wider text-white">
+          <h3 className="font-mono text-sm font-semibold tracking-wider text-[#201c22]">
             {project.title}
           </h3>
           <p className="mt-1 text-xs text-fog">{project.subtitle}</p>
@@ -150,7 +150,7 @@ function ProjectDetail({
           animate={{ opacity: 1, transition: { delay: reduced ? 0 : 0.25 } }}
           exit={{ opacity: 0, transition: { duration: 0.1 } }}
         >
-          <h3 className="font-mono text-xl font-bold tracking-wide text-white md:text-2xl">
+          <h3 className="font-mono text-xl font-bold tracking-wide text-[#201c22] md:text-2xl">
             {project.title}
           </h3>
           <p className={`mt-1 font-mono text-xs tracking-[0.2em] ${accentClass}`}>
@@ -169,7 +169,7 @@ function ProjectDetail({
             {project.specs.map((s) => (
               <div key={s.k} className="flex justify-between gap-4 border-b border-line/40 py-1.5 font-mono text-[11px]">
                 <span className="tracking-[0.15em] text-ghost">{s.k}</span>
-                <span className="text-right text-white">{s.v}</span>
+                <span className="text-right text-[#201c22]">{s.v}</span>
               </div>
             ))}
           </div>
@@ -205,7 +205,7 @@ export default function Projects() {
       <div className="mb-12 flex items-end justify-between">
         <div>
           <p className="mb-3 font-mono text-[11px] tracking-[0.35em] text-accent">02 / PROJECTS</p>
-          <h2 className="text-3xl font-medium text-white md:text-4xl">
+          <h2 className="text-3xl font-medium text-[#201c22] md:text-4xl">
             Build log<span className="text-accent">.</span>
           </h2>
         </div>

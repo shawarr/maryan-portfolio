@@ -37,7 +37,7 @@ export default function MagneticButton({
 
   const base =
     variant === 'solid'
-      ? 'bg-accent text-ink hover:bg-[#ff8226]'
+      ? 'bg-accent text-ink hover:bg-[#c2185b]'
       : 'border border-line text-fog hover:border-accent hover:text-accent'
 
   return (

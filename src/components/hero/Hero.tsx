@@ -161,7 +161,7 @@ export default function Hero({
           >
             // PORTFOLIO v2.0 — {IDENTITY.location}
           </motion.p>
-          <h1 className="font-mono text-[clamp(2.2rem,8vw,5.5rem)] font-bold leading-none tracking-tight text-white">
+          <h1 className="font-mono text-[clamp(2.2rem,8vw,5.5rem)] font-bold leading-none tracking-tight text-[#201c22]">
             <KineticTitle text={IDENTITY.name} start={started} delay={500} reduced={reduced} />
           </h1>
           <div className="mt-5 flex items-center gap-4">

@@ -116,7 +116,7 @@ export default function About({ reduced }: { reduced: boolean }) {
           {/* left — narrative phases */}
           <div>
             <p className="mb-3 font-mono text-[11px] tracking-[0.35em] text-accent">01 / ABOUT</p>
-            <h2 className="mb-10 text-3xl font-medium text-white md:text-4xl">
+            <h2 className="mb-10 text-3xl font-medium text-[#201c22] md:text-4xl">
               Operator profile<span className="text-accent">.</span>
             </h2>
             <div className="relative h-[240px] md:h-[260px]">
@@ -125,7 +125,7 @@ export default function About({ reduced }: { reduced: boolean }) {
                   <p className="mb-3 font-mono text-[10px] tracking-[0.3em] text-blueprint">
                     {phase.kicker}
                   </p>
-                  <h3 className="mb-4 text-2xl font-medium text-white md:text-3xl">{phase.title}</h3>
+                  <h3 className="mb-4 text-2xl font-medium text-[#201c22] md:text-3xl">{phase.title}</h3>
                   <p className="max-w-md leading-relaxed text-fog">{phase.body}</p>
                 </div>
               ))}
@@ -142,7 +142,7 @@ export default function About({ reduced }: { reduced: boolean }) {
               {ABOUT.specs.map((s) => (
                 <div key={s.k} className="spec-line flex items-baseline justify-between gap-4 border-b border-line/40 pb-2 font-mono text-xs">
                   <dt className="shrink-0 tracking-[0.2em] text-ghost">{s.k}</dt>
-                  <dd className="text-right tracking-wider text-white">{s.v}</dd>
+                  <dd className="text-right tracking-wider text-[#201c22]">{s.v}</dd>
                 </div>
               ))}
             </dl>
