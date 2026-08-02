@@ -181,15 +181,23 @@ function Bolt({ m }: { m: Mats }) {
 function GearboxAssembly({
   anim,
   reduced,
+  mobile,
   m,
 }: {
   anim: RefObject<HeroAnim>
   reduced: boolean
+  mobile: boolean
   m: Mats
 }) {
   const root = useRef<THREE.Group>(null)
   const mainGearGeo = useGearGeometry(20, 0.95, 0.26, 0.16)
   const pinionGeo = useGearGeometry(11, 0.5, 0.26, 0.1)
+
+  /* Push the assembly off-center so it shares the frame with the headline
+     text instead of sitting under it: right on desktop (text takes the
+     left column), down on mobile (text sits above, in the cleared band). */
+  const offsetX = mobile ? 0 : 1.5
+  const offsetY = mobile ? -0.55 : 0
 
   useFrame((state, dt) => {
     const g = root.current
@@ -202,7 +210,7 @@ function GearboxAssembly({
     const targetX = -state.pointer.y * 0.1 + 0.12 + explode * 0.12
     g.rotation.y = THREE.MathUtils.damp(g.rotation.y, targetY, 2.4, step)
     g.rotation.x = THREE.MathUtils.damp(g.rotation.x, targetX, 2.4, step)
-    g.position.y = reduced ? 0 : Math.sin(t * 0.5) * 0.05
+    g.position.y = offsetY + (reduced ? 0 : Math.sin(t * 0.5) * 0.05)
   })
 
   const gearSpin = reduced ? 0 : 0.55
@@ -216,7 +224,7 @@ function GearboxAssembly({
   ]
 
   return (
-    <group ref={root} scale={1.05}>
+    <group ref={root} scale={1.05} position={[offsetX, 0, 0]}>
       {/* back housing plate */}
       <Part anim={anim} pos={[0, 0, -0.55]} off={[0, -0.3, -1.7]} tumble={[0.3, 0.2, 0.1]}>
         <RoundedBox args={[3.3, 2.4, 0.14]} radius={0.06}>
@@ -377,7 +385,7 @@ export default function AssemblyScene({
       <directionalLight position={[4, 6, 5]} intensity={mobile ? 2.2 : 0.8} color="#fff8fa" />
       {mobile && <directionalLight position={[-4, 2, -3]} intensity={0.9} color="#d6d0d4" />}
       <pointLight position={[-5, -2, 3]} intensity={12} color="#ec1f77" distance={12} />
-      <GearboxAssembly anim={anim} reduced={reduced} m={mobile ? MOBILE_MATS : DESKTOP_MATS} />
+      <GearboxAssembly anim={anim} reduced={reduced} mobile={mobile} m={mobile ? MOBILE_MATS : DESKTOP_MATS} />
       {!mobile && (
         <Grid
           position={[0, -2.1, 0]}

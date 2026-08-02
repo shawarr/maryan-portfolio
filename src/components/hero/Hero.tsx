@@ -111,7 +111,7 @@ export default function Hero({
         />
         {/* faint dimension circle behind the model */}
         <svg
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-25"
+          className="absolute left-1/2 top-[61%] -translate-x-1/2 -translate-y-1/2 opacity-25 md:left-[68%] md:top-1/2"
           width="640"
           height="640"
           viewBox="-320 -320 640 640"
@@ -148,9 +148,9 @@ export default function Hero({
           )}
         </div>
 
-        {/* headline overlay */}
+        {/* headline overlay — kept to its own half so it never sits over the model */}
         <motion.div
-          className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-5 text-center"
+          className="pointer-events-none absolute left-1/2 top-10 w-full max-w-[420px] -translate-x-1/2 px-5 text-center md:left-10 md:top-1/2 md:w-[40%] md:max-w-none md:translate-x-0 md:-translate-y-1/2 md:px-0 md:text-left lg:left-14 lg:w-[36%]"
           style={{ opacity: titleOpacity, y: titleY }}
         >
           <motion.p
