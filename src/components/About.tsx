@@ -54,10 +54,8 @@ export default function About({ reduced }: { reduced: boolean }) {
     }
 
     const ctx = gsap.context(() => {
-      const phases = gsap.utils.toArray<HTMLElement>('.about-phase')
       const specs = gsap.utils.toArray<HTMLElement>('.spec-line')
 
-      gsap.set(phases.slice(1), { autoAlpha: 0, y: 26 })
       gsap.set(specs, { autoAlpha: 0, x: -18 })
 
       const tl = gsap.timeline({
@@ -70,12 +68,6 @@ export default function About({ reduced }: { reduced: boolean }) {
           onUpdate: (self) => setPct(Math.round(self.progress * 100)),
         },
       })
-
-      // narrative phases crossfade like scrubbing a process video
-      tl.to(phases[0], { autoAlpha: 0, y: -26, duration: 1 }, 1.2)
-        .to(phases[1], { autoAlpha: 1, y: 0, duration: 1 }, 1.7)
-        .to(phases[1], { autoAlpha: 0, y: -26, duration: 1 }, 3.2)
-        .to(phases[2], { autoAlpha: 1, y: 0, duration: 1 }, 3.7)
 
       // spec sheet populates line by line across the whole scrub
       specs.forEach((line, i) => {
@@ -117,25 +109,18 @@ export default function About({ reduced }: { reduced: boolean }) {
           <div>
             <p className="mb-3 font-mono text-[11px] tracking-[0.35em] text-accent">01 / ABOUT</p>
             <h2 className="mb-10 text-3xl font-medium text-[#201c22] md:text-4xl">
-              Operator profile<span className="text-accent">.</span>
+              Engineer Profile<span className="text-accent">.</span>
             </h2>
-            <div className="relative h-[240px] md:h-[260px]">
-              {ABOUT.phases.map((phase) => (
-                <div key={phase.kicker} className="about-phase absolute inset-0">
-                  <p className="mb-3 font-mono text-[10px] tracking-[0.3em] text-blueprint">
-                    {phase.kicker}
-                  </p>
-                  <h3 className="mb-4 text-2xl font-medium text-[#201c22] md:text-3xl">{phase.title}</h3>
-                  <p className="max-w-md leading-relaxed text-fog">{phase.body}</p>
-                </div>
-              ))}
+            <div>
+              <h3 className="mb-4 text-2xl font-medium text-[#201c22] md:text-3xl">{ABOUT.intro.title}</h3>
+              <p className="max-w-md leading-relaxed text-fog">{ABOUT.intro.body}</p>
             </div>
           </div>
 
           {/* right — HUD spec sheet */}
           <div className="hud-corners self-center border border-line bg-panel/70 p-6 backdrop-blur-sm md:p-8">
             <div className="mb-5 flex items-center justify-between border-b border-line pb-3 font-mono text-[10px] tracking-[0.25em]">
-              <span className="text-fog">SPEC SHEET — OPERATOR</span>
+              <span className="text-fog">ENGINEER SPECS</span>
               <span className="text-accent tabular-nums">SCRUB {String(pct).padStart(3, '0')}%</span>
             </div>
             <dl className="space-y-3">

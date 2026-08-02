@@ -9,7 +9,7 @@ export const IDENTITY = {
   name: 'MARYAN BAKIR',
   firstName: 'MARYAN',
   role: 'MECHANICAL ENGINEERING STUDENT',
-  tagline: 'I design, simulate and build machines — from CAD to chips on the shop floor.',
+  tagline: 'I think best with a CAD model open and a simulation running.',
   location: 'AMMAN, JO', // shown as a HUD readout
   coordinates: '31.9539° N / 35.9106° E',
   /* PLACEHOLDER — contact links */
@@ -20,32 +20,19 @@ export const IDENTITY = {
 }
 
 export const ABOUT = {
-  /* Three narrative phases shown while the About section is pinned */
-  phases: [
-    {
-      kicker: 'PHASE 01 / DESIGN',
-      title: 'Parts begin as constraints.',
-      body: 'Every project starts in CAD — sketching, constraining, and iterating until the geometry earns its tolerances. I care about the difference between a model that renders well and a part that machines well.',
-    },
-    {
-      kicker: 'PHASE 02 / ANALYSIS',
-      title: 'Then the math gets a vote.',
-      body: 'FEA, thermal studies, hand calcs to sanity-check the solver. Simulation is where a pretty assembly either survives its load case or goes back to the sketch. I trust the numbers, but I verify them twice.',
-    },
-    {
-      kicker: 'PHASE 03 / BUILD',
-      title: 'Finally, it has to exist.',
-      body: '3D printers, mills, lathes and a lot of deburring. Manufacturing is the honest phase — the one where datum surfaces, fits and finish stop being annotations and start being real.',
-    },
-  ],
+  /* Static intro shown while the About section is pinned */
+  intro: {
+    title: 'Meet The Engineer.',
+    body: "I am a fourth-year mechanical engineering student who enjoys turning ambitious ideas into working solutions. Whether it's designing in CAD, validating through simulation, or building prototypes. I am particularly interested in robotics, aerospace engineering, product development, and bridging digital design with the physical world.",
+  },
   /* Spec-sheet lines that populate the HUD panel while scrolling */
   specs: [
-    { k: 'DESIGNATION', v: 'B.Sc. MECHANICAL ENGINEERING' },
-    { k: 'INSTITUTION', v: 'AL HUSSEIN TECHNICAL UNIVERSITY (HTU)' },
+    { k: 'MAJOR', v: 'B.Sc. MECHANICAL ENGINEERING' },
+    { k: 'UNIVERSITY', v: 'AL HUSSEIN TECHNICAL UNIVERSITY (HTU)' },
     { k: 'CLASS OF', v: '2027' }, // PLACEHOLDER
-    { k: 'GPA', v: '4.0 / 4.0' },
-    { k: 'FOCUS', v: 'DESIGN · FEA · MECHATRONICS' },
-    { k: 'STATUS', v: 'OPEN TO INTERNSHIPS' },
+    { k: 'GPA', v: '3.97 / 4.0' },
+    { k: 'INTERESTS', v: 'CAD · FEA · AEROSPACE · ROBOTICS' },
+    { k: 'STATUS', v: 'OPEN TO APPRENTICESHIPS' },
   ],
   /* Calibration gauges — value is 0–100 */
   gauges: [
