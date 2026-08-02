@@ -64,19 +64,16 @@ export default function Contact({ reduced }: { reduced: boolean }) {
           Assembly complete<span className="text-accent">.</span>
         </h2>
         <p className="mx-auto mt-5 max-w-md leading-relaxed text-fog">
-          Looking for internships and student design teams. If you have a machine that needs
-          designing, simulating, or fixing — send a work order.
+          Thanks for taking the time to explore my work. I hope this portfolio gave you a sense
+          of how I think, design, and solve problems. If you'd like to learn more, I'd love to
+          connect!
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <MagneticButton href={`mailto:${IDENTITY.email}`} variant="solid">
-            SEND WORK ORDER ▸
-          </MagneticButton>
-          <MagneticButton href={IDENTITY.linkedin}>LINKEDIN</MagneticButton>
-          <MagneticButton href={IDENTITY.github}>GITHUB</MagneticButton>
-          <MagneticButton href={IDENTITY.resumeUrl} download>
+          <MagneticButton href={IDENTITY.resumeUrl} variant="solid" download>
             RESUME.PDF ↓
           </MagneticButton>
+          <MagneticButton href={IDENTITY.linkedin}>LINKEDIN</MagneticButton>
         </div>
       </div>
 
@@ -86,6 +83,9 @@ export default function Contact({ reduced }: { reduced: boolean }) {
           <span>{IDENTITY.coordinates}</span>
           <span>DWG NO. PORTFOLIO-2026 / SHEET 1 OF 1</span>
         </div>
+        <p className="mt-8 text-center font-mono text-[11px] tracking-[0.3em] text-accent">
+          End of Transmission. The next project starts with a conversation.
+        </p>
       </footer>
     </section>
   )

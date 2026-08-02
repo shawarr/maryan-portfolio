@@ -22,7 +22,7 @@ export default function Skills({ reduced }: { reduced: boolean }) {
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <p className="mb-3 font-mono text-[11px] tracking-[0.35em] text-accent">03 / TOOLING</p>
         <h2 className="mb-12 text-3xl font-medium text-[#201c22] md:text-4xl">
-          Instrument panel<span className="text-accent">.</span>
+          Skills Panel<span className="text-accent">.</span>
         </h2>
 
         <motion.ul
