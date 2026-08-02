@@ -72,7 +72,11 @@ function ProjectCard({
         {/* drawing viewport */}
         <div className="bp-grid relative aspect-[16/10] overflow-hidden [background-size:60px_60px,60px_60px,12px_12px,12px_12px]">
           <div className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-[1.06]">
-            <TechnicalDrawing kind={project.drawing} reduced={reduced} className="h-full w-full p-4" />
+            {project.image ? (
+              <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
+            ) : (
+              <TechnicalDrawing kind={project.drawing} reduced={reduced} className="h-full w-full p-4" />
+            )}
           </div>
           {/* hover annotation overlay */}
           <div className="absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-ink via-ink/85 to-transparent px-5 pb-4 pt-10 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
@@ -92,7 +96,9 @@ function ProjectCard({
           <h3 className="font-mono text-sm font-semibold tracking-wider text-[#201c22]">
             {project.title}
           </h3>
-          <p className="mt-1 text-xs text-fog">{project.subtitle}</p>
+          <p className="mt-1 text-xs text-fog">
+            {project.course} · {project.year}
+          </p>
         </div>
       </motion.div>
     </motion.div>
@@ -154,16 +160,24 @@ function ProjectDetail({
             {project.title}
           </h3>
           <p className={`mt-1 font-mono text-xs tracking-[0.2em] ${accentClass}`}>
-            {project.subtitle.toUpperCase()}
+            {`${project.course} · ${project.year}`.toUpperCase()}
           </p>
 
           <div className="bp-grid mt-6 border border-line/60 [background-size:80px_80px,80px_80px,16px_16px,16px_16px]">
-            {/* SWAP POINT: replace with an <img> render or an interactive
-                react-three-fiber canvas of the real CAD model */}
-            <TechnicalDrawing kind={project.drawing} reduced={reduced} className="mx-auto h-56 w-full max-w-md md:h-64" />
+            {/* SWAP POINT: set project.image once real renders/photos are in —
+                falls back to the placeholder TechnicalDrawing until then */}
+            {project.image ? (
+              <img
+                src={project.image}
+                alt={project.title}
+                className="mx-auto h-56 w-full max-w-md object-cover md:h-64"
+              />
+            ) : (
+              <TechnicalDrawing kind={project.drawing} reduced={reduced} className="mx-auto h-56 w-full max-w-md md:h-64" />
+            )}
           </div>
 
-          <p className="mt-6 leading-relaxed text-fog">{project.description}</p>
+          <p className="mt-6 text-justify leading-relaxed text-fog [hyphens:auto]">{project.description}</p>
 
           <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-2 border-t border-line pt-5 sm:grid-cols-2">
             {project.specs.map((s) => (
@@ -214,7 +228,7 @@ export default function Projects() {
         </span>
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {PROJECTS.map((p) => (
           <ProjectCard
             key={p.id}
