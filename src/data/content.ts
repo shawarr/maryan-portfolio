@@ -12,9 +12,9 @@ export const IDENTITY = {
   tagline: 'I think best with a CAD model open and a simulation running.',
   location: 'AMMAN, JO', // shown as a HUD readout
   coordinates: '31.9539° N / 35.9106° E',
-  /* PLACEHOLDER — contact links */
-  email: 'hello@example.com',
-  linkedin: 'https://linkedin.com/in/your-handle',
+  email: 'meme.bakir04@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/maryanbakir',
+  /* PLACEHOLDER — no public GitHub link yet */
   github: 'https://github.com/your-handle',
   resumeUrl: '/resume.pdf', // drop a resume.pdf into /public
 }

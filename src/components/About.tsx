@@ -112,7 +112,7 @@ export default function About({ reduced }: { reduced: boolean }) {
               Engineer Profile<span className="text-accent">.</span>
             </h2>
             <div>
-              <h3 className="mb-4 text-2xl font-medium text-[#201c22] md:text-3xl">{ABOUT.intro.title}</h3>
+              <h3 className="mb-4 text-xl font-medium text-[#201c22] md:text-2xl">{ABOUT.intro.title}</h3>
               <p className="max-w-md text-justify leading-relaxed text-fog [hyphens:auto]">{ABOUT.intro.body}</p>
             </div>
           </div>

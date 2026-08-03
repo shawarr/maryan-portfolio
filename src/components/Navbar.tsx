@@ -20,20 +20,21 @@ export default function Navbar({ ready }: { ready: boolean }) {
           <svg width="22" height="22" viewBox="-11 -11 22 22" aria-hidden>
             <g
               stroke="var(--color-accent)"
-              strokeWidth="1.5"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               fill="none"
               className="origin-center transition-transform duration-500 group-hover:rotate-90"
             >
               <circle r="5.5" />
-              <circle r="2" />
-              <rect x="-1.1" y="-8" width="2.2" height="2.4" />
-              <rect x="-1.1" y="-8" width="2.2" height="2.4" transform="rotate(45)" />
-              <rect x="-1.1" y="-8" width="2.2" height="2.4" transform="rotate(90)" />
-              <rect x="-1.1" y="-8" width="2.2" height="2.4" transform="rotate(135)" />
-              <rect x="-1.1" y="-8" width="2.2" height="2.4" transform="rotate(180)" />
-              <rect x="-1.1" y="-8" width="2.2" height="2.4" transform="rotate(225)" />
-              <rect x="-1.1" y="-8" width="2.2" height="2.4" transform="rotate(270)" />
-              <rect x="-1.1" y="-8" width="2.2" height="2.4" transform="rotate(315)" />
+              <path d="M-1.4 -5.5 L-0.8 -8.2 Q0 -8.8 0.8 -8.2 L1.4 -5.5" />
+              <path d="M-1.4 -5.5 L-0.8 -8.2 Q0 -8.8 0.8 -8.2 L1.4 -5.5" transform="rotate(45)" />
+              <path d="M-1.4 -5.5 L-0.8 -8.2 Q0 -8.8 0.8 -8.2 L1.4 -5.5" transform="rotate(90)" />
+              <path d="M-1.4 -5.5 L-0.8 -8.2 Q0 -8.8 0.8 -8.2 L1.4 -5.5" transform="rotate(135)" />
+              <path d="M-1.4 -5.5 L-0.8 -8.2 Q0 -8.8 0.8 -8.2 L1.4 -5.5" transform="rotate(180)" />
+              <path d="M-1.4 -5.5 L-0.8 -8.2 Q0 -8.8 0.8 -8.2 L1.4 -5.5" transform="rotate(225)" />
+              <path d="M-1.4 -5.5 L-0.8 -8.2 Q0 -8.8 0.8 -8.2 L1.4 -5.5" transform="rotate(270)" />
+              <path d="M-1.4 -5.5 L-0.8 -8.2 Q0 -8.8 0.8 -8.2 L1.4 -5.5" transform="rotate(315)" />
             </g>
           </svg>
           <span className="font-mono text-xs tracking-[0.25em] text-[#201c22]">
@@ -62,7 +63,7 @@ export default function Navbar({ ready }: { ready: boolean }) {
           data-cursor="link"
           className="hidden border border-accent/50 px-4 py-1.5 font-mono text-[11px] tracking-[0.2em] text-accent transition-colors hover:bg-accent hover:text-ink md:block"
         >
-          HIRE
+          EMAIL
         </a>
         <span className="font-mono text-[10px] tracking-widest text-ghost md:hidden">
           {IDENTITY.location}

@@ -78,8 +78,9 @@ export default function Contact({ reduced }: { reduced: boolean }) {
       </div>
 
       <div className="relative mx-auto mt-28 max-w-3xl border-t border-line/60 px-5 pt-10 text-center">
-        <p className="font-mono text-[11px] tracking-[0.3em] text-accent">
-          End of Transmission. The next project starts with a conversation.
+        <p className="font-mono text-[11px] tracking-[0.3em] text-accent">End of Transmission.</p>
+        <p className="mt-2 font-mono text-[11px] tracking-[0.3em] text-accent">
+          The next project starts with a conversation.
         </p>
       </div>
 
