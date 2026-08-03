@@ -19,22 +19,18 @@ export default function Navbar({ ready }: { ready: boolean }) {
         >
           <svg width="22" height="22" viewBox="-11 -11 22 22" aria-hidden>
             <g
-              stroke="var(--color-accent)"
-              strokeWidth="1.4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              fill="none"
+              fill="var(--color-accent)"
               className="origin-center transition-transform duration-500 group-hover:rotate-90"
             >
               <circle r="5.5" />
-              <path d="M-1.4 -5.5 L-0.8 -8.2 Q0 -8.8 0.8 -8.2 L1.4 -5.5" />
-              <path d="M-1.4 -5.5 L-0.8 -8.2 Q0 -8.8 0.8 -8.2 L1.4 -5.5" transform="rotate(45)" />
-              <path d="M-1.4 -5.5 L-0.8 -8.2 Q0 -8.8 0.8 -8.2 L1.4 -5.5" transform="rotate(90)" />
-              <path d="M-1.4 -5.5 L-0.8 -8.2 Q0 -8.8 0.8 -8.2 L1.4 -5.5" transform="rotate(135)" />
-              <path d="M-1.4 -5.5 L-0.8 -8.2 Q0 -8.8 0.8 -8.2 L1.4 -5.5" transform="rotate(180)" />
-              <path d="M-1.4 -5.5 L-0.8 -8.2 Q0 -8.8 0.8 -8.2 L1.4 -5.5" transform="rotate(225)" />
-              <path d="M-1.4 -5.5 L-0.8 -8.2 Q0 -8.8 0.8 -8.2 L1.4 -5.5" transform="rotate(270)" />
-              <path d="M-1.4 -5.5 L-0.8 -8.2 Q0 -8.8 0.8 -8.2 L1.4 -5.5" transform="rotate(315)" />
+              <rect x="-1.2" y="-6.9" width="2.4" height="2.6" />
+              <rect x="-1.2" y="-6.9" width="2.4" height="2.6" transform="rotate(45)" />
+              <rect x="-1.2" y="-6.9" width="2.4" height="2.6" transform="rotate(90)" />
+              <rect x="-1.2" y="-6.9" width="2.4" height="2.6" transform="rotate(135)" />
+              <rect x="-1.2" y="-6.9" width="2.4" height="2.6" transform="rotate(180)" />
+              <rect x="-1.2" y="-6.9" width="2.4" height="2.6" transform="rotate(225)" />
+              <rect x="-1.2" y="-6.9" width="2.4" height="2.6" transform="rotate(270)" />
+              <rect x="-1.2" y="-6.9" width="2.4" height="2.6" transform="rotate(315)" />
             </g>
           </svg>
           <span className="font-mono text-xs tracking-[0.25em] text-[#201c22]">
