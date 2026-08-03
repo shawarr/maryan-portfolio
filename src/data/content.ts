@@ -238,8 +238,33 @@ export const PROJECTS: Project[] = [
     accent: 'blueprint',
   },
   {
-    id: 'sumo-2024',
+    id: 'cutting-board',
     index: 'PRJ-008',
+    title: 'MULTI-FUNCTIONAL CUTTING BOARD',
+    course: 'Manufacturing Processes',
+    year: '2024–2025',
+    description:
+      'This project centered on the design and fabrication of a multi-functional wooden cutting board engineered to enhance kitchen efficiency by integrating a retractable phone stand. The development process began with a market study and the use of a House of Quality (HoQ) matrix to translate customer requirements, such as water resistance, food safety, and easy access, into specific product design targets. My role encompassed the complete end-to-end development cycle: I modeled the entire assembly in SolidWorks and constructed a physical prototype using traditional manufacturing techniques, including material removal (shearing, milling, and drilling), adhesive bonding, and mechanical fastening with metal hinges. Furthermore, I developed comprehensive manufacturing flow and process charts, performed a detailed unit cost and financial analysis, and applied Design for Manufacturing (DFM) and Design for Assembly (DFA) principles to minimize part count and simplify future mass production using advanced CNC machining.',
+    annotations: [
+      { k: 'FEATURE', v: 'RETRACTABLE PHONE STAND' },
+      { k: 'METHOD', v: 'HoQ · DFM/DFA' },
+      { k: 'BUILD', v: 'SHEAR · MILL · DRILL' },
+    ],
+    specs: [
+      { k: 'MATERIAL', v: 'WOOD' },
+      { k: 'FEATURE', v: 'RETRACTABLE PHONE STAND' },
+      { k: 'REQUIREMENTS', v: 'HOUSE OF QUALITY (HoQ) MATRIX' },
+      { k: 'FABRICATION', v: 'SHEARING · MILLING · DRILLING' },
+      { k: 'ASSEMBLY', v: 'ADHESIVE BONDING + METAL HINGES' },
+      { k: 'ANALYSIS', v: 'DFM/DFA + UNIT COST' },
+    ],
+    tools: ['SolidWorks', 'DFM/DFA', 'CNC Machining', 'House of Quality'],
+    drawing: 'bracket',
+    accent: 'accent',
+  },
+  {
+    id: 'sumo-2024',
+    index: 'PRJ-009',
     title: 'HTU ANNUAL SUMO ROBOTS COMPETITION — 2024',
     course: 'HTU Sumo Robotics Competition',
     year: '2024',
@@ -264,7 +289,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'jansen-linkage',
-    index: 'PRJ-009',
+    index: 'PRJ-010',
     title: 'JANSEN LINKAGE PLANAR MECHANISM',
     course: 'Mechanical Principles',
     year: '2023–2024',
@@ -289,7 +314,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'el-huevo',
-    index: 'PRJ-010',
+    index: 'PRJ-011',
     title: 'EL HUEVO: AIR-FRYER INSPIRED EGG COOKER',
     course: 'Engineering Design',
     year: '2022–2023',
