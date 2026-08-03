@@ -113,7 +113,7 @@ export default function About({ reduced }: { reduced: boolean }) {
             </h2>
             <div>
               <h3 className="mb-4 text-2xl font-medium text-[#201c22] md:text-3xl">{ABOUT.intro.title}</h3>
-              <p className="max-w-md leading-relaxed text-fog">{ABOUT.intro.body}</p>
+              <p className="max-w-md text-justify leading-relaxed text-fog [hyphens:auto]">{ABOUT.intro.body}</p>
             </div>
           </div>
 

@@ -24,8 +24,16 @@ export default function Navbar({ ready }: { ready: boolean }) {
               fill="none"
               className="origin-center transition-transform duration-500 group-hover:rotate-90"
             >
-              <circle r="5" />
-              <path d="M0 -9v3M0 6v3M-9 0h3M6 0h3M-6.4 -6.4l2.2 2.2M4.2 4.2l2.2 2.2M6.4 -6.4l-2.2 2.2M-4.2 4.2l-2.2 2.2" />
+              <circle r="5.5" />
+              <circle r="2" />
+              <rect x="-1.1" y="-8" width="2.2" height="2.4" />
+              <rect x="-1.1" y="-8" width="2.2" height="2.4" transform="rotate(45)" />
+              <rect x="-1.1" y="-8" width="2.2" height="2.4" transform="rotate(90)" />
+              <rect x="-1.1" y="-8" width="2.2" height="2.4" transform="rotate(135)" />
+              <rect x="-1.1" y="-8" width="2.2" height="2.4" transform="rotate(180)" />
+              <rect x="-1.1" y="-8" width="2.2" height="2.4" transform="rotate(225)" />
+              <rect x="-1.1" y="-8" width="2.2" height="2.4" transform="rotate(270)" />
+              <rect x="-1.1" y="-8" width="2.2" height="2.4" transform="rotate(315)" />
             </g>
           </svg>
           <span className="font-mono text-xs tracking-[0.25em] text-[#201c22]">

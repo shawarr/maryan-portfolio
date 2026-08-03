@@ -164,11 +164,11 @@ export default function Hero({
           <h1 className="font-mono text-[clamp(2.2rem,8vw,5.5rem)] font-bold leading-none tracking-tight text-[#201c22]">
             <KineticTitle text={IDENTITY.name} start={started} delay={500} reduced={reduced} />
           </h1>
-          <h2 className="mt-2 font-mono text-[clamp(0.65rem,2vw,0.85rem)] tracking-[0.35em] text-fog">
+          <h2 className="mt-4 font-mono text-[clamp(0.65rem,2vw,0.85rem)] tracking-[0.35em] text-fog">
             <KineticTitle text={IDENTITY.role} start={started} delay={1500} reduced={reduced} />
           </h2>
           <motion.p
-            className="mt-8 max-w-md text-sm leading-relaxed text-fog/90 sm:text-base"
+            className="mt-4 max-w-md text-sm leading-relaxed text-fog/90 sm:text-base"
             initial={{ opacity: 0, y: 14 }}
             animate={started ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 2.4, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}

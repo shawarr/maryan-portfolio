@@ -77,15 +77,18 @@ export default function Contact({ reduced }: { reduced: boolean }) {
         </div>
       </div>
 
-      <footer className="relative mt-28 border-t border-line/60 pt-6">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 font-mono text-[10px] tracking-[0.2em] text-ghost md:flex-row md:px-8">
+      <div className="relative mx-auto mt-28 max-w-3xl border-t border-line/60 px-5 pt-10 text-center">
+        <p className="font-mono text-[11px] tracking-[0.3em] text-accent">
+          End of Transmission. The next project starts with a conversation.
+        </p>
+      </div>
+
+      <footer className="relative mt-10">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 pb-2 font-mono text-[10px] tracking-[0.2em] text-ghost md:flex-row md:px-8">
           <span>© {new Date().getFullYear()} {IDENTITY.name} — ALL TOLERANCES NOMINAL</span>
           <span>{IDENTITY.coordinates}</span>
           <span>DWG NO. PORTFOLIO-2026 / SHEET 1 OF 1</span>
         </div>
-        <p className="mt-8 text-center font-mono text-[11px] tracking-[0.3em] text-accent">
-          End of Transmission. The next project starts with a conversation.
-        </p>
       </footer>
     </section>
   )
