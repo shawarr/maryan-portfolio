@@ -18,8 +18,15 @@ export default function Navbar({ ready }: { ready: boolean }) {
           aria-label="Back to top"
         >
           <svg width="22" height="22" viewBox="-11 -11 22 22" aria-hidden>
+            <defs>
+              <mask id="gear-bore" maskUnits="userSpaceOnUse" x="-11" y="-11" width="22" height="22">
+                <rect x="-11" y="-11" width="22" height="22" fill="white" />
+                <circle r="1.3" fill="black" />
+              </mask>
+            </defs>
             <g
               fill="var(--color-accent)"
+              mask="url(#gear-bore)"
               className="origin-center transition-transform duration-500 group-hover:rotate-90"
             >
               <circle r="5.5" />
