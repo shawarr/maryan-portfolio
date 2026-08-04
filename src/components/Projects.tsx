@@ -237,6 +237,7 @@ function ProjectDetail({
 
         <motion.div
           className="overflow-y-auto px-6 py-6 md:px-8"
+          data-lenis-prevent
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { delay: reduced ? 0 : 0.25 } }}
           exit={{ opacity: 0, transition: { duration: 0.1 } }}

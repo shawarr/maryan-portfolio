@@ -84,7 +84,7 @@ export default function Contact({ reduced }: { reduced: boolean }) {
         </p>
       </div>
 
-      <footer className="relative mt-10">
+      <footer className="relative mt-24">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 pb-2 font-mono text-[10px] tracking-[0.2em] text-ghost md:flex-row md:px-8">
           <span>© {new Date().getFullYear()} {IDENTITY.name} — ALL TOLERANCES NOMINAL</span>
           <span>{IDENTITY.coordinates}</span>
