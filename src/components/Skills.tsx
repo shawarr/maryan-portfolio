@@ -93,7 +93,7 @@ function SkillTile({ skill, index }: { skill: { id: string; name: string; cat: s
         data-cursor="link"
         aria-pressed={flipped}
         aria-label={`${skill.name} — ${flipped ? 'showing category' : 'show category'}`}
-        className="group block h-20 w-full text-left"
+        className="group block h-24 w-full text-left"
       >
         <motion.div
           className="relative h-full w-full"
@@ -104,26 +104,26 @@ function SkillTile({ skill, index }: { skill: { id: string; name: string; cat: s
           {/* front */}
           <div
             style={{ backfaceVisibility: 'hidden' }}
-            className="absolute inset-0 flex flex-col justify-center gap-1 p-3 transition-colors duration-300 group-hover:bg-panel"
+            className="absolute inset-0 flex flex-col justify-center gap-1.5 p-4 transition-colors duration-300 group-hover:bg-panel"
           >
-            <span className="font-mono text-[8px] tracking-[0.2em] text-ghost">
+            <span className="font-mono text-[9px] tracking-[0.2em] text-ghost">
               S-{String(index + 1).padStart(2, '0')}
             </span>
-            <h3 className="text-xs font-medium leading-snug text-[#201c22] transition-colors group-hover:text-accent">
+            <h3 className="text-sm font-medium leading-snug text-[#201c22] transition-colors group-hover:text-accent">
               {skill.name}
             </h3>
           </div>
           {/* back */}
           <div
             style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
-            className="absolute inset-0 flex flex-col justify-center gap-1 bg-accent p-3"
+            className="absolute inset-0 flex flex-col justify-center gap-1.5 bg-accent p-4"
           >
-            <span className="font-mono text-[8px] tracking-[0.2em] text-ink/70">CATEGORY</span>
-            <p className="font-mono text-[10px] leading-snug tracking-wide text-ink">{skill.cat}</p>
+            <span className="font-mono text-[9px] tracking-[0.2em] text-ink/70">CATEGORY</span>
+            <p className="font-mono text-xs leading-snug tracking-wide text-ink">{skill.cat}</p>
           </div>
         </motion.div>
       </button>
-      <span className="pointer-events-none absolute right-1.5 top-1.5 size-1 border border-line transition-colors duration-300 group-hover:border-accent group-hover:bg-accent-dim" />
+      <span className="pointer-events-none absolute right-2 top-2 size-1.5 border border-line transition-colors duration-300 group-hover:border-accent group-hover:bg-accent-dim" />
     </motion.li>
   )
 }
@@ -138,7 +138,7 @@ export default function Skills({ reduced }: { reduced: boolean }) {
         </h2>
 
         <motion.ul
-          className="grid grid-cols-3 gap-px border border-line bg-line sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7"
+          className="grid grid-cols-3 gap-px border border-line bg-line sm:grid-cols-4 md:grid-cols-6"
           variants={reduced ? undefined : gridVariants}
           initial={reduced ? false : 'hidden'}
           whileInView={reduced ? undefined : 'show'}

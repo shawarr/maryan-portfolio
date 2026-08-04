@@ -413,7 +413,6 @@ export const SKILLS = [
   { id: 'mig', name: 'MIG Welding', cat: 'WELDING (AWS)' },
 
   { id: 'cura', name: 'Ultimaker Cura', cat: 'SLICING SOFTWARE' },
-  { id: 'ultimaker', name: 'Ultimaker 3D Printers', cat: 'FDM HARDWARE' },
   { id: 'fdm', name: 'FDM Printing', cat: '3D PRINTING' },
   { id: 'sla', name: 'SLA Printing', cat: '3D PRINTING' },
 ]
