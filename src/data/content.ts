@@ -42,6 +42,8 @@ export const ABOUT = {
   ],
 }
 
+export type ProjectMedia = { type: 'image' | 'video'; src: string }
+
 export type Project = {
   id: string
   index: string
@@ -56,9 +58,9 @@ export type Project = {
   tools: string[]
   drawing: 'gear' | 'arm' | 'turbine' | 'bracket'
   accent: 'accent' | 'blueprint'
-  /* real photo/render — drop a path in /public and set this to swap out
-     the placeholder TechnicalDrawing SVG for the actual project image */
-  image?: string
+  /* real photos/renders/clips — falls back to the placeholder TechnicalDrawing
+     SVG when omitted */
+  media?: ProjectMedia[]
 }
 
 export const PROJECTS: Project[] = [
@@ -86,6 +88,11 @@ export const PROJECTS: Project[] = [
     tools: ['CAD Design', 'Structural Optimization', 'Stepper Motors', 'Cast Silicone'],
     drawing: 'turbine',
     accent: 'accent',
+    media: [
+      { type: 'image', src: '/projects/octobot/1.jpg' },
+      { type: 'image', src: '/projects/octobot/2.jpg' },
+      { type: 'image', src: '/projects/octobot/3.jpg' },
+    ],
   },
   {
     id: 'coffee-vending-machine',
@@ -111,6 +118,10 @@ export const PROJECTS: Project[] = [
     tools: ['FDM 3D Printing', 'Laser Cutting', 'Archimedes Screw', 'Volumetric Metering'],
     drawing: 'gear',
     accent: 'accent',
+    media: [
+      { type: 'image', src: '/projects/coffee-vending-machine/1.jpg' },
+      { type: 'image', src: '/projects/coffee-vending-machine/2.jpg' },
+    ],
   },
   {
     id: 'adaptive-grippers',
@@ -136,6 +147,10 @@ export const PROJECTS: Project[] = [
     tools: ['SolidWorks', 'nTopology', 'Topology Optimization', 'DFAM'],
     drawing: 'arm',
     accent: 'blueprint',
+    media: [
+      { type: 'image', src: '/projects/adaptive-grippers/1.jpg' },
+      { type: 'image', src: '/projects/adaptive-grippers/2.jpg' },
+    ],
   },
   {
     id: 'rc-car',
@@ -161,6 +176,10 @@ export const PROJECTS: Project[] = [
     tools: ['Laser Cutting', 'Gear Train Design', 'Ackermann Steering', 'Stress Analysis'],
     drawing: 'gear',
     accent: 'accent',
+    media: [
+      { type: 'image', src: '/projects/rc-car/1.jpg' },
+      { type: 'image', src: '/projects/rc-car/2.jpg' },
+    ],
   },
   {
     id: 'sumo-2025',
@@ -186,6 +205,10 @@ export const PROJECTS: Project[] = [
     tools: ['SolidWorks', 'Laser Cutting', 'IR Sensors', 'Arduino Uno'],
     drawing: 'bracket',
     accent: 'blueprint',
+    media: [
+      { type: 'image', src: '/projects/sumo-2025/1.jpg' },
+      { type: 'image', src: '/projects/sumo-2025/2.jpg' },
+    ],
   },
   {
     id: 'insulin-app',
@@ -211,6 +234,11 @@ export const PROJECTS: Project[] = [
     tools: ['Python', 'TensorFlow', 'Keras', 'pyttsx3'],
     drawing: 'gear',
     accent: 'blueprint',
+    media: [
+      { type: 'image', src: '/projects/insulin-app/1.jpg' },
+      { type: 'image', src: '/projects/insulin-app/2.jpg' },
+      { type: 'image', src: '/projects/insulin-app/3.jpg' },
+    ],
   },
   {
     id: 'airfoil-cfd',
@@ -236,6 +264,10 @@ export const PROJECTS: Project[] = [
     tools: ['ANSYS Fluent', 'CFD', 'Turbulence Modeling', 'Aerodynamics'],
     drawing: 'turbine',
     accent: 'blueprint',
+    media: [
+      { type: 'image', src: '/projects/airfoil-cfd/1.jpg' },
+      { type: 'image', src: '/projects/airfoil-cfd/2.jpg' },
+    ],
   },
   {
     id: 'cutting-board',
@@ -261,6 +293,10 @@ export const PROJECTS: Project[] = [
     tools: ['SolidWorks', 'DFM/DFA', 'CNC Machining', 'House of Quality'],
     drawing: 'bracket',
     accent: 'accent',
+    media: [
+      { type: 'image', src: '/projects/cutting-board/1.jpg' },
+      { type: 'image', src: '/projects/cutting-board/2.jpg' },
+    ],
   },
   {
     id: 'sumo-2024',
@@ -286,6 +322,7 @@ export const PROJECTS: Project[] = [
     tools: ['Arduino Uno', 'Sheet Metal Fab', 'IR Sensors', 'H-Bridge Drivers'],
     drawing: 'bracket',
     accent: 'accent',
+    media: [{ type: 'image', src: '/projects/sumo-2024/1.jpg' }],
   },
   {
     id: 'jansen-linkage',
@@ -311,6 +348,7 @@ export const PROJECTS: Project[] = [
     tools: ['Eight-Bar Linkage', 'Laser Cutting', 'Kinematic Design', 'Mechanism Optimization'],
     drawing: 'arm',
     accent: 'accent',
+    media: [{ type: 'image', src: '/projects/jansen-linkage/1.jpg' }],
   },
   {
     id: 'el-huevo',
@@ -336,6 +374,11 @@ export const PROJECTS: Project[] = [
     tools: ['Arduino Uno', 'Bluetooth App', 'Relay Control', 'Product Design'],
     drawing: 'bracket',
     accent: 'blueprint',
+    media: [
+      { type: 'image', src: '/projects/el-huevo/1.jpg' },
+      { type: 'image', src: '/projects/el-huevo/2.jpg' },
+      { type: 'video', src: '/projects/el-huevo/video.mp4' },
+    ],
   },
 ]
 
@@ -351,6 +394,82 @@ export const SKILLS = [
   { id: 'cnc', name: 'CNC Machining', cat: 'MFG', level: 75 },
   { id: 'print', name: '3D Printing', cat: 'FDM / SLA', level: 92 },
   { id: 'weld', name: 'TIG Welding', cat: 'FAB', level: 62 },
+]
+
+export type Certificate = {
+  id: string
+  title: string
+  org: string
+  date: string
+  note: string
+  file: string
+  preview: string
+}
+
+export const CERTIFICATES: Certificate[] = [
+  {
+    id: 'control-systems',
+    title: 'Control Systems',
+    org: 'HTUx — Al Hussein Technical University Online Academy',
+    date: 'JAN 2026',
+    note: 'Module of the Mobile RobotiX pathway, covering control systems and PID controllers.',
+    file: '/certificates/cert-01.pdf',
+    preview: '/certificates/preview-01.jpg',
+  },
+  {
+    id: 'sumo-robots',
+    title: 'SUMO Robots',
+    org: 'HTUx — Al Hussein Technical University Online Academy',
+    date: 'JUL 2024',
+    note: 'Course on the design and control of autonomous SUMO combat robots.',
+    file: '/certificates/cert-02.pdf',
+    preview: '/certificates/preview-02.jpg',
+  },
+  {
+    id: 'solidworks-cad',
+    title: 'SOLIDWORKS CAD Design Associate',
+    org: 'Dassault Systèmes',
+    date: 'NOV 2024',
+    note: 'Official CSWA-level certification, credential C-JQTNDV6R8P.',
+    file: '/certificates/cert-03.pdf',
+    preview: '/certificates/preview-03.jpg',
+  },
+  {
+    id: 'solidworks-additive',
+    title: 'SOLIDWORKS Additive Manufacturing Associate',
+    org: 'Dassault Systèmes',
+    date: 'NOV 2024',
+    note: 'Official certification in additive manufacturing design, credential C-FCVZJQR37L.',
+    file: '/certificates/cert-04.pdf',
+    preview: '/certificates/preview-04.jpg',
+  },
+  {
+    id: 'ap-scholar',
+    title: 'AP Scholar with Distinction',
+    org: 'College Board',
+    date: 'JUL 2022',
+    note: 'Awarded for an average score of 3.5+ across 5 AP exams, with 3 or higher on each.',
+    file: '/certificates/cert-05.pdf',
+    preview: '/certificates/preview-05.jpg',
+  },
+  {
+    id: 'egg-boiler-creativity',
+    title: 'Certificate of Appreciation — Creativity Award',
+    org: 'Al Hussein Technical University, Mechanical Dept.',
+    date: 'JUN 2023',
+    note: 'Awarded for building "El Huevo," an automated egg boiler, in the Creativity category.',
+    file: '/certificates/cert-06.pdf',
+    preview: '/certificates/preview-06.jpg',
+  },
+  {
+    id: 'zain-internship',
+    title: 'Letter of Experience — Engineering Intern',
+    org: 'Zain Jordan',
+    date: 'JUL–AUG 2025',
+    note: 'Engineering internship in the electromechanical department, Zain Youth Intern program.',
+    file: '/certificates/cert-07.pdf',
+    preview: '/certificates/preview-07.jpg',
+  },
 ]
 
 export const NAV = [

@@ -1,5 +1,70 @@
-import { motion, type Variants } from 'framer-motion'
-import { SKILLS } from '../data/content'
+import { useState } from 'react'
+import { motion, AnimatePresence, type Variants } from 'framer-motion'
+import { SKILLS, CERTIFICATES, type Certificate } from '../data/content'
+
+/* ---------- certificate row — reveals its preview only once clicked ---------- */
+function CertificateRow({ cert, index }: { cert: Certificate; index: number }) {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <li className="border border-line bg-ink">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        data-cursor="link"
+        aria-expanded={open}
+        className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-panel/60"
+      >
+        <div className="flex items-baseline gap-4">
+          <span className="font-mono text-[9px] tracking-[0.2em] text-ghost">
+            C-{String(index + 1).padStart(2, '0')}
+          </span>
+          <div>
+            <h4 className="text-sm font-medium text-[#201c22]">{cert.title}</h4>
+            <p className="mt-1 font-mono text-[9px] tracking-[0.15em] text-ghost">
+              {cert.org} · {cert.date}
+            </p>
+          </div>
+        </div>
+        <span
+          className={`shrink-0 font-mono text-lg leading-none text-accent transition-transform duration-300 ${open ? 'rotate-45' : ''}`}
+          aria-hidden
+        >
+          +
+        </span>
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden border-t border-line"
+          >
+            <div className="p-5">
+              <p className="max-w-xl text-xs leading-relaxed text-fog">{cert.note}</p>
+              <img
+                src={cert.preview}
+                alt={`${cert.title} certificate preview`}
+                loading="lazy"
+                className="mt-4 h-auto w-full max-w-[280px] border border-line"
+              />
+              <a
+                href={cert.file}
+                target="_blank"
+                rel="noreferrer"
+                data-cursor="link"
+                className="mt-4 inline-block border border-line px-3 py-1.5 font-mono text-[10px] tracking-[0.2em] text-fog transition-colors hover:border-accent hover:text-accent"
+              >
+                VIEW FULL CERTIFICATE ↗
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </li>
+  )
+}
 
 const gridVariants: Variants = {
   hidden: {},
@@ -74,6 +139,22 @@ export default function Skills({ reduced }: { reduced: boolean }) {
         <p className="mt-6 text-right font-mono text-[10px] tracking-[0.2em] text-ghost">
           CALIBRATION SCALE 0–100 / SELF-ASSESSED
         </p>
+
+        <div className="mt-20">
+          <div className="mb-6 flex items-end justify-between">
+            <h3 className="text-xl font-medium text-[#201c22] md:text-2xl">
+              Certifications<span className="text-accent">.</span>
+            </h3>
+            <span className="hidden font-mono text-[10px] tracking-[0.2em] text-ghost md:block">
+              {CERTIFICATES.length} ON FILE / CLICK TO EXPAND
+            </span>
+          </div>
+          <ul className="space-y-3">
+            {CERTIFICATES.map((cert, i) => (
+              <CertificateRow key={cert.id} cert={cert} index={i} />
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   )

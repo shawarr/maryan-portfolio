@@ -4,6 +4,87 @@ import { PROJECTS, type Project } from '../data/content'
 import TechnicalDrawing from './TechnicalDrawing'
 import { getLenis, usePrefersReducedMotion, useIsMobile } from '../lib/scroll'
 
+/* ---------- media gallery for the expanded detail view ---------- */
+function ProjectGallery({ project, reduced, className }: { project: Project; reduced: boolean; className?: string }) {
+  const [i, setI] = useState(0)
+  const media = project.media
+
+  if (!media || media.length === 0) {
+    return (
+      <TechnicalDrawing
+        kind={project.drawing}
+        reduced={reduced}
+        className={className ?? 'mx-auto h-56 w-full max-w-md md:h-64'}
+      />
+    )
+  }
+
+  const current = media[i]
+  const go = (e: MouseEvent, delta: number) => {
+    e.stopPropagation()
+    setI((n) => (n + delta + media.length) % media.length)
+  }
+
+  return (
+    <div className={className}>
+      <div className="relative aspect-[16/10] overflow-hidden bg-ink">
+        {current.type === 'video' ? (
+          <video
+            key={current.src}
+            src={current.src}
+            controls
+            playsInline
+            className="h-full w-full object-contain"
+          />
+        ) : (
+          <img
+            key={current.src}
+            src={current.src}
+            alt={`${project.title} — view ${i + 1} of ${media.length}`}
+            className="h-full w-full object-contain"
+          />
+        )}
+        {media.length > 1 && (
+          <>
+            <button
+              onClick={(e) => go(e, -1)}
+              data-cursor="link"
+              aria-label="Previous media"
+              className="absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center border border-line bg-panel/80 text-fog backdrop-blur-sm transition-colors hover:border-accent hover:text-accent"
+            >
+              ‹
+            </button>
+            <button
+              onClick={(e) => go(e, 1)}
+              data-cursor="link"
+              aria-label="Next media"
+              className="absolute right-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center border border-line bg-panel/80 text-fog backdrop-blur-sm transition-colors hover:border-accent hover:text-accent"
+            >
+              ›
+            </button>
+          </>
+        )}
+      </div>
+      {media.length > 1 && (
+        <div className="mt-3 flex justify-center gap-2">
+          {media.map((m, idx) => (
+            <button
+              key={m.src}
+              onClick={(e) => {
+                e.stopPropagation()
+                setI(idx)
+              }}
+              data-cursor="link"
+              aria-label={`Show ${m.type} ${idx + 1}`}
+              className={`h-1.5 w-5 transition-colors ${idx === i ? 'bg-accent' : 'bg-line hover:bg-ghost'}`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 /* ---------- project card with 3D tilt + annotation overlay ---------- */
 function ProjectCard({
   project,
@@ -72,8 +153,12 @@ function ProjectCard({
         {/* drawing viewport */}
         <div className="bp-grid relative aspect-[16/10] overflow-hidden [background-size:60px_60px,60px_60px,12px_12px,12px_12px]">
           <div className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-[1.06]">
-            {project.image ? (
-              <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
+            {project.media?.find((m) => m.type === 'image') ? (
+              <img
+                src={project.media.find((m) => m.type === 'image')!.src}
+                alt={project.title}
+                className="h-full w-full object-cover"
+              />
             ) : (
               <TechnicalDrawing kind={project.drawing} reduced={reduced} className="h-full w-full p-4" />
             )}
@@ -164,17 +249,7 @@ function ProjectDetail({
           </p>
 
           <div className="bp-grid mt-6 border border-line/60 [background-size:80px_80px,80px_80px,16px_16px,16px_16px]">
-            {/* SWAP POINT: set project.image once real renders/photos are in —
-                falls back to the placeholder TechnicalDrawing until then */}
-            {project.image ? (
-              <img
-                src={project.image}
-                alt={project.title}
-                className="mx-auto h-56 w-full max-w-md object-cover md:h-64"
-              />
-            ) : (
-              <TechnicalDrawing kind={project.drawing} reduced={reduced} className="mx-auto h-56 w-full max-w-md md:h-64" />
-            )}
+            <ProjectGallery project={project} reduced={reduced} />
           </div>
 
           <p className="mt-6 text-justify leading-relaxed text-fog [hyphens:auto]">{project.description}</p>
