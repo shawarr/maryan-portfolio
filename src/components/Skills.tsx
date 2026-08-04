@@ -68,7 +68,7 @@ function CertificateRow({ cert, index }: { cert: Certificate; index: number }) {
 
 const gridVariants: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.04, delayChildren: 0.1 } },
 }
 
 const tileVariants: Variants = {
@@ -79,6 +79,55 @@ const tileVariants: Variants = {
     scale: 1,
     transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
   },
+}
+
+/* ---------- skill tile — flips on click to reveal its category, since
+   there's no honest way to give it a proficiency score ---------- */
+function SkillTile({ skill, index }: { skill: { id: string; name: string; cat: string }; index: number }) {
+  const [flipped, setFlipped] = useState(false)
+
+  return (
+    <motion.li variants={tileVariants} className="relative bg-ink" style={{ perspective: 800 }}>
+      <button
+        onClick={() => setFlipped((v) => !v)}
+        data-cursor="link"
+        aria-pressed={flipped}
+        aria-label={`${skill.name} — ${flipped ? 'showing category' : 'show category'}`}
+        className="group block h-32 w-full text-left"
+      >
+        <motion.div
+          className="relative h-full w-full"
+          style={{ transformStyle: 'preserve-3d' }}
+          animate={{ rotateY: flipped ? 180 : 0 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {/* front */}
+          <div
+            style={{ backfaceVisibility: 'hidden' }}
+            className="absolute inset-0 flex flex-col justify-between p-5 transition-colors duration-300 group-hover:bg-panel"
+          >
+            <span className="font-mono text-[9px] tracking-[0.2em] text-ghost">
+              S-{String(index + 1).padStart(2, '0')}
+            </span>
+            <h3 className="text-sm font-medium leading-snug text-[#201c22] transition-colors group-hover:text-accent">
+              {skill.name}
+            </h3>
+            <span className="font-mono text-[9px] tracking-[0.15em] text-ghost/70">TAP FOR CATEGORY</span>
+          </div>
+          {/* back */}
+          <div
+            style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+            className="absolute inset-0 flex flex-col justify-between bg-accent p-5"
+          >
+            <span className="font-mono text-[9px] tracking-[0.2em] text-ink/70">CATEGORY</span>
+            <p className="font-mono text-xs leading-snug tracking-wide text-ink">{skill.cat}</p>
+            <span className="font-mono text-[9px] tracking-[0.15em] text-ink/70">{skill.name.toUpperCase()}</span>
+          </div>
+        </motion.div>
+      </button>
+      <span className="pointer-events-none absolute right-2 top-2 size-1.5 border border-line transition-colors duration-300 group-hover:border-accent group-hover:bg-accent-dim" />
+    </motion.li>
+  )
 }
 
 export default function Skills({ reduced }: { reduced: boolean }) {
@@ -98,46 +147,12 @@ export default function Skills({ reduced }: { reduced: boolean }) {
           viewport={{ once: true, margin: '-100px' }}
         >
           {SKILLS.map((skill, i) => (
-            <motion.li
-              key={skill.id}
-              variants={reduced ? undefined : tileVariants}
-              data-cursor="link"
-              className="group relative bg-ink p-5 transition-colors duration-300 hover:bg-panel"
-            >
-              <span className="font-mono text-[9px] tracking-[0.2em] text-ghost">
-                T-{String(i + 1).padStart(2, '0')}
-              </span>
-              <h3 className="mt-3 text-sm font-medium text-[#201c22] transition-colors group-hover:text-accent">
-                {skill.name}
-              </h3>
-              <p className="mt-0.5 font-mono text-[9px] tracking-[0.15em] text-ghost">{skill.cat}</p>
-              {/* calibration bar — fills with a slight overshoot */}
-              <div className="mt-4 flex items-center gap-2">
-                <div className="h-[3px] flex-1 bg-line">
-                  <motion.div
-                    className="h-full bg-accent/80 group-hover:bg-accent"
-                    initial={reduced ? false : { width: 0 }}
-                    whileInView={{ width: `${skill.level}%` }}
-                    viewport={{ once: true, margin: '-100px' }}
-                    transition={{
-                      duration: 1,
-                      delay: 0.3 + i * 0.06,
-                      type: 'spring',
-                      stiffness: 60,
-                      damping: 12,
-                    }}
-                  />
-                </div>
-                <span className="font-mono text-[9px] text-fog tabular-nums">{skill.level}</span>
-              </div>
-              {/* corner tick appears on hover */}
-              <span className="absolute right-2 top-2 size-1.5 border border-line transition-colors duration-300 group-hover:border-accent group-hover:bg-accent-dim" />
-            </motion.li>
+            <SkillTile key={skill.id} skill={skill} index={i} />
           ))}
         </motion.ul>
 
         <p className="mt-6 text-right font-mono text-[10px] tracking-[0.2em] text-ghost">
-          CALIBRATION SCALE 0–100 / SELF-ASSESSED
+          {SKILLS.length} TOOLS ON RECORD / TAP A TILE TO FLIP
         </p>
 
         <div className="mt-20">

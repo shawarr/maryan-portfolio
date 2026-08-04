@@ -382,18 +382,40 @@ export const PROJECTS: Project[] = [
   },
 ]
 
-/* PLACEHOLDER SKILLS — id is just for keys, level is 0–100 */
+/* Real skills pulled from the CV (soft skills — attention to detail, comms,
+   etc. — intentionally left out), plus workshop/fabrication skills added on
+   top. No proficiency numbers: each tile flips to reveal its category
+   instead of claiming a self-assessed score. */
 export const SKILLS = [
-  { id: 'sw', name: 'SolidWorks', cat: 'CAD', level: 95 },
-  { id: 'f360', name: 'Fusion 360', cat: 'CAD / CAM', level: 88 },
-  { id: 'ansys', name: 'ANSYS', cat: 'FEA / CFD', level: 78 },
-  { id: 'matlab', name: 'MATLAB', cat: 'ANALYSIS', level: 84 },
-  { id: 'python', name: 'Python', cat: 'SCRIPTING', level: 80 },
-  { id: 'simulink', name: 'Simulink', cat: 'CONTROLS', level: 70 },
-  { id: 'gdt', name: 'GD&T', cat: 'ASME Y14.5', level: 86 },
-  { id: 'cnc', name: 'CNC Machining', cat: 'MFG', level: 75 },
-  { id: 'print', name: '3D Printing', cat: 'FDM / SLA', level: 92 },
-  { id: 'weld', name: 'TIG Welding', cat: 'FAB', level: 62 },
+  { id: 'sw', name: 'SolidWorks', cat: 'CAD' },
+  { id: 'autocad', name: 'AutoCAD', cat: 'CAD' },
+  { id: 'ntop', name: 'nTopology', cat: 'TOPOLOGY OPTIMIZATION' },
+  { id: 'reverse-eng', name: 'Reverse Engineering', cat: 'DESIGN' },
+
+  { id: 'ansys', name: 'ANSYS', cat: 'FEA / CFD' },
+  { id: 'abaqus', name: 'Abaqus', cat: 'FEA' },
+  { id: 'matlab', name: 'MATLAB', cat: 'ANALYSIS' },
+  { id: 'mathematica', name: 'Wolfram Mathematica', cat: 'ANALYSIS' },
+  { id: 'ees', name: 'Engineering Equation Solver', cat: 'THERMO ANALYSIS' },
+  { id: 'multisim', name: 'Multisim', cat: 'CIRCUIT SIMULATION' },
+  { id: 'hap', name: 'HAP', cat: 'HVAC LOAD ANALYSIS' },
+  { id: 'loggerpro', name: 'LoggerPro', cat: 'DATA ACQUISITION' },
+
+  { id: 'arduino', name: 'Arduino IDE', cat: 'EMBEDDED' },
+  { id: 'c', name: 'C Programming', cat: 'PROGRAMMING' },
+  { id: 'python', name: 'Python', cat: 'SCRIPTING' },
+  { id: 'msproject', name: 'Microsoft Project', cat: 'PROJECT MANAGEMENT' },
+
+  { id: 'cnc', name: 'CNC Machining', cat: 'MANUFACTURING' },
+  { id: 'laser', name: 'Laser Cutting', cat: 'FABRICATION' },
+  { id: 'gdt', name: 'GD&T', cat: 'ASME Y14.5' },
+  { id: 'tig', name: 'TIG Welding', cat: 'WELDING (AWS)' },
+  { id: 'mig', name: 'MIG Welding', cat: 'WELDING (AWS)' },
+
+  { id: 'cura', name: 'Ultimaker Cura', cat: 'SLICING SOFTWARE' },
+  { id: 'ultimaker', name: 'Ultimaker 3D Printers', cat: 'FDM HARDWARE' },
+  { id: 'fdm', name: 'FDM Printing', cat: '3D PRINTING' },
+  { id: 'sla', name: 'SLA Printing', cat: '3D PRINTING' },
 ]
 
 export type Certificate = {
