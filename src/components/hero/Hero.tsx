@@ -54,9 +54,15 @@ export default function Hero({
   const [glFailed, setGlFailed] = useState(false)
 
   /* scroll through this 260vh section drives the exploded view */
+  /* Numeric offsets resolve to exactly the same range as
+     ['start start', 'end end'], but they deliberately don't match one of
+     Motion's ViewTimeline presets. That keeps scroll tracking on the JS
+     path: the native ViewTimeline measures this section's own pass through
+     the viewport, which runs up and back down for a tall sticky section and
+     made the headline fade back in over the HUD. */
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start start', 'end end'],
+    offset: [0, 1],
   })
   useMotionValueEvent(scrollYProgress, 'change', (v) => {
     anim.current.explode = reduced ? 0 : v
