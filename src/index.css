@@ -23,6 +23,7 @@
 html {
   background: var(--color-ink);
   scrollbar-color: var(--color-line) var(--color-ink);
+  overflow-x: hidden;
 }
 
 html.lenis,
@@ -41,7 +42,7 @@ body {
   background: var(--color-ink);
   color: #201c22;
   font-family: var(--font-sans);
-  overflow-x: clip;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
