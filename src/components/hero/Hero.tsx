@@ -78,7 +78,9 @@ export default function Hero({
   /* headline fades/lifts away as the assembly explodes */
   const titleOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0])
   const titleY = useTransform(scrollYProgress, [0, 0.35], [0, -60])
-  const hudOpacity = useTransform(scrollYProgress, [0.25, 0.5, 0.85, 1], [0, 1, 1, 0])
+  /* starts only once the headline has fully faded (0.35) — the two overlays
+     share the same band on mobile, so the handoff has to be exclusive */
+  const hudOpacity = useTransform(scrollYProgress, [0.36, 0.55, 0.85, 1], [0, 1, 1, 0])
   const scrollHint = useTransform(scrollYProgress, [0, 0.08], [1, 0])
 
   /* blueprint grid parallax follows the mouse */
