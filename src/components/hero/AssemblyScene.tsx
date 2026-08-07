@@ -87,11 +87,14 @@ function Annotation({
   side: 'left' | 'right'
   refCb: RefObject<HTMLDivElement | null>
 }) {
+  // wrapperClass hides drei's portaled wrapper too — without it the zero-width
+  // wrapper still tracks the exploded part past the right screen edge and makes
+  // the whole page scroll sideways on mobile.
   return (
-    <Html zIndexRange={[30, 0]} center style={{ pointerEvents: 'none' }}>
+    <Html zIndexRange={[30, 0]} center style={{ pointerEvents: 'none' }} wrapperClass="hidden md:block">
       <div
         ref={refCb}
-        className="hidden select-none md:block"
+        className="select-none"
         style={{ opacity: 0, transition: 'opacity 0.15s linear' }}
       >
         <div

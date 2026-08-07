@@ -150,7 +150,7 @@ export default function Hero({
 
         {/* headline overlay — kept to its own half so it never sits over the model */}
         <motion.div
-          className="pointer-events-none absolute left-1/2 top-10 w-full max-w-[420px] -translate-x-1/2 px-5 text-center md:left-10 md:top-1/2 md:w-[40%] md:max-w-none md:translate-x-0 md:-translate-y-1/2 md:px-0 md:text-left lg:left-14 lg:w-[36%]"
+          className="pointer-events-none absolute left-1/2 top-24 w-full max-w-[420px] -translate-x-1/2 px-5 text-center md:left-10 md:top-1/2 md:w-[40%] md:max-w-none md:translate-x-0 md:-translate-y-1/2 md:px-0 md:text-left lg:left-14 lg:w-[36%]"
           style={{ opacity: titleOpacity, y: titleY }}
         >
           <motion.p
@@ -159,7 +159,7 @@ export default function Hero({
             animate={started ? { opacity: 1 } : {}}
             transition={{ delay: 0.3 }}
           >
-            // PORTFOLIO v2.0 — {IDENTITY.location}
+            // PORTFOLIO · {IDENTITY.location}
           </motion.p>
           <h1 className="font-mono text-[clamp(2.2rem,8vw,5.5rem)] font-bold leading-none tracking-tight text-[#201c22]">
             <KineticTitle text={IDENTITY.name} start={started} delay={500} reduced={reduced} />
