@@ -16,7 +16,10 @@ export const IDENTITY = {
   linkedin: 'https://www.linkedin.com/in/maryanbakir',
   /* PLACEHOLDER — no public GitHub link yet */
   github: 'https://github.com/your-handle',
-  resumeUrl: '/resume.pdf', // drop a resume.pdf into /public
+  /* The file itself is named "Maryan Bakir - CV.pdf" in /public so it saves under that
+     name even if the browser ignores the download attribute (%20 = a space in a URL). */
+  resumeUrl: '/Maryan%20Bakir%20-%20CV.pdf',
+  resumeFileName: 'Maryan Bakir - CV.pdf', // what it saves as on the visitor's computer
 }
 
 export const ABOUT = {

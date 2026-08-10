@@ -70,7 +70,7 @@ export default function Contact({ reduced }: { reduced: boolean }) {
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <MagneticButton href={IDENTITY.resumeUrl} variant="solid" download>
+          <MagneticButton href={IDENTITY.resumeUrl} variant="solid" download={IDENTITY.resumeFileName}>
             RESUME.PDF ↓
           </MagneticButton>
           <MagneticButton href={IDENTITY.linkedin}>LINKEDIN</MagneticButton>

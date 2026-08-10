@@ -4,11 +4,93 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ==================================================================
+         SEO. The goal is that searching "Maryan Bakir" finds this site.
+         The name must appear in the title and description — search engines
+         weigh those most heavily, and the hero animates its text in with
+         JavaScript, which a crawler may not capture.
+         Keep maryanbakir.com as the canonical address everywhere below:
+         several other domains serve this same site, and the canonical tag
+         is what tells Google which one is the real one.
+         ================================================================== -->
+    <title>Maryan Bakir — Mechanical Engineering Portfolio</title>
     <meta
       name="description"
-      content="Portfolio of a mechanical engineering student — CAD, FEA, manufacturing and robotics projects."
+      content="Maryan Bakir is a fourth-year mechanical engineering student in Amman, Jordan, working in CAD, FEA, manufacturing and robotics. See projects, skills and CV."
     />
-    <title>MARYAN — Mechanical Engineering Portfolio</title>
+    <link rel="canonical" href="https://maryanbakir.com/" />
+    <meta name="author" content="Maryan Bakir" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <!-- Link previews when the site is shared (LinkedIn, WhatsApp, etc.) -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Maryan Bakir" />
+    <meta property="og:title" content="Maryan Bakir — Mechanical Engineering Portfolio" />
+    <meta
+      property="og:description"
+      content="Fourth-year mechanical engineering student in Amman, Jordan. CAD, FEA, manufacturing and robotics projects."
+    />
+    <meta property="og:url" content="https://maryanbakir.com/" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="profile:first_name" content="Maryan" />
+    <meta property="profile:last_name" content="Bakir" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Maryan Bakir — Mechanical Engineering Portfolio" />
+    <meta
+      name="twitter:description"
+      content="Fourth-year mechanical engineering student in Amman, Jordan. CAD, FEA, manufacturing and robotics projects."
+    />
+
+    <!-- Structured data: tells search engines this site is about a specific
+         person, so it can show a proper profile panel for the name.
+         The WebSite entry sets the "site name" line Google prints above the
+         result — without it Google invents one from the domain, which comes
+         out lowercase ("maryan bakir"). This is the highest-priority source
+         Google documents for that line, above og:site_name. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://maryanbakir.com/#website",
+        "name": "Maryan Bakir",
+        "alternateName": "Maryan Bakir — Mechanical Engineering Portfolio",
+        "url": "https://maryanbakir.com/",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://maryanbakir.com/#person" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://maryanbakir.com/#person",
+        "name": "Maryan Bakir",
+        "givenName": "Maryan",
+        "familyName": "Bakir",
+        "jobTitle": "Mechanical Engineering Student",
+        "description": "Fourth-year mechanical engineering student working in CAD, FEA, manufacturing and robotics.",
+        "url": "https://maryanbakir.com/",
+        "email": "mailto:meme.bakir04@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Amman",
+          "addressCountry": "JO"
+        },
+        "knowsAbout": [
+          "Mechanical Engineering",
+          "CAD",
+          "Finite Element Analysis",
+          "Manufacturing",
+          "Robotics",
+          "Product Development"
+        ],
+        "sameAs": ["https://www.linkedin.com/in/maryanbakir"],
+        "mainEntityOfPage": { "@id": "https://maryanbakir.com/#website" }
+      }
+        ]
+      }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,6 +100,20 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Plain-text fallback: real content for any crawler that does not run
+         JavaScript. Invisible to normal visitors, who see the React site. -->
+    <noscript>
+      <h1>Maryan Bakir</h1>
+      <p>Mechanical Engineering Student — Amman, Jordan</p>
+      <p>
+        Fourth-year mechanical engineering student who enjoys turning ambitious ideas into
+        working solutions — designing in CAD, validating through simulation, and building
+        prototypes. Interested in robotics, aerospace engineering, product development, and
+        bridging digital design with the physical world.
+      </p>
+      <p><a href="https://www.linkedin.com/in/maryanbakir">LinkedIn</a></p>
+      <p><a href="/Maryan%20Bakir%20-%20CV.pdf">Download CV</a></p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

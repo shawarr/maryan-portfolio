@@ -12,7 +12,8 @@ export default function MagneticButton({
 }: {
   href: string
   children: ReactNode
-  download?: boolean
+  /** `true` downloads as-is; a string sets the saved filename. */
+  download?: boolean | string
   variant?: 'outline' | 'solid'
   className?: string
 }) {
