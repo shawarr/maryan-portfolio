@@ -1,15 +1,30 @@
 /* The three.js half of ModelViewer, split into its own chunk so the 3D
    bundle is only fetched when a model actually comes into view. */
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Bounds, OrbitControls, useGLTF } from '@react-three/drei'
 import type { Group } from 'three'
 
-function Model({ src, spin, interactive }: { src: string; spin: number; interactive: boolean }) {
+function Model({
+  src,
+  spin,
+  interactive,
+  onReady,
+}: {
+  src: string
+  spin: number
+  interactive: boolean
+  onReady: () => void
+}) {
   /* useGLTF enables the meshopt decoder by default, which is what these files
      are compressed with — no external decoder files, nothing from a CDN. */
   const { scene } = useGLTF(src)
   const ref = useRef<Group>(null)
+
+  /* useGLTF suspends until the file is parsed, so reaching this effect means
+     there is something real to draw — that's the cue to drop the still image
+     underneath, which would otherwise show through the transparent canvas. */
+  useEffect(onReady, [onReady])
 
   useFrame((_, dt) => {
     if (ref.current && !interactive) ref.current.rotation.y += dt * spin * 0.25
@@ -26,10 +41,12 @@ export default function ModelCanvas({
   src,
   mode,
   spin,
+  onReady,
 }: {
   src: string
   mode: 'card' | 'inspect'
   spin: number
+  onReady: () => void
 }) {
   const interactive = mode === 'inspect'
   return (
@@ -51,7 +68,7 @@ export default function ModelCanvas({
       {/* Bounds re-frames whatever the model's scale happens to be — STEP
           exports arrive in millimetres, metres or anything else. */}
       <Bounds fit clip observe margin={interactive ? 1.1 : 1.35}>
-        <Model src={src} spin={spin} interactive={interactive} />
+        <Model src={src} spin={spin} interactive={interactive} onReady={onReady} />
       </Bounds>
 
       {interactive && (

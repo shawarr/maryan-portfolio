@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, type MouseEvent } from 'react'
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
-import { PROJECTS, type Project } from '../data/content'
+import { PROJECTS, previewSrc, type Project } from '../data/content'
 import TechnicalDrawing from './TechnicalDrawing'
-import ModelViewer, { previewSrc } from './ModelViewer'
+import ModelViewer from './ModelViewer'
 import { getLenis, usePrefersReducedMotion, useIsMobile } from '../lib/scroll'
 
 /* ---------- media gallery for the expanded detail view ---------- */

@@ -74,6 +74,9 @@ export type Project = {
   model?: string
 }
 
+/** Swap ".glb" for "-preview.glb" — the simplified twin used on project cards. */
+export const previewSrc = (src: string) => src.replace(/\.glb$/, '-preview.glb')
+
 export const PROJECTS: Project[] = [
   {
     id: 'octobot',

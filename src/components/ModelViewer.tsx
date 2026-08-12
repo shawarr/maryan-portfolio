@@ -19,6 +19,7 @@ import {
   Component,
   Suspense,
   lazy,
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -42,11 +43,6 @@ class ModelBoundary extends Component<
   }
 }
 
-/** Swap ".glb" for "-preview.glb" — the heavily simplified card twin. */
-export function previewSrc(src: string) {
-  return src.replace(/\.glb$/, '-preview.glb')
-}
-
 export default function ModelViewer({
   src,
   mode = 'card',
@@ -63,6 +59,8 @@ export default function ModelViewer({
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
   const [hovered, setHovered] = useState(false)
+  const [ready, setReady] = useState(false)
+  const onReady = useCallback(() => setReady(true), [])
   const reduced = usePrefersReducedMotion()
   const mobile = useIsMobile()
 
@@ -88,13 +86,21 @@ export default function ModelViewer({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* the still image sits underneath until the model has drawn, so the
-          slot is never blank while the chunk and .glb download */}
-      <div className="absolute inset-0">{fallback}</div>
+      {/* The still image holds the slot while the chunk and .glb download, then
+          fades out — the canvas is transparent, so leaving it up would show the
+          photo through the model. It stays mounted (not unmounted) so a dropped
+          WebGL context can fall straight back to it. */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-500 ${
+          ready ? 'opacity-0' : 'opacity-100'
+        }`}
+      >
+        {fallback}
+      </div>
       {visible && (
         <ModelBoundary fallback={<></>}>
           <Suspense fallback={null}>
-            <ModelCanvas src={src} mode={mode} spin={hovered ? 2.4 : 0.5} />
+            <ModelCanvas src={src} mode={mode} spin={hovered ? 2.4 : 0.5} onReady={onReady} />
           </Suspense>
         </ModelBoundary>
       )}
