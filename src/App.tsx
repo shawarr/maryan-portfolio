@@ -5,6 +5,7 @@ import Cursor from './components/Cursor'
 import ScrollProgress from './components/ScrollProgress'
 import Hero from './components/hero/Hero'
 import About from './components/About'
+import Experience from './components/Experience'
 import Projects from './components/Projects'
 import Skills from './components/Skills'
 import Contact from './components/Contact'
@@ -28,6 +29,7 @@ export default function App() {
       <main>
         <Hero started={booted} reduced={reduced} mobile={mobile} />
         <About reduced={reduced} />
+        <Experience reduced={reduced} />
         <Projects />
         <Skills reduced={reduced} />
         <Contact reduced={reduced} />

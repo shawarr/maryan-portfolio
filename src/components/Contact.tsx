@@ -59,7 +59,7 @@ export default function Contact({ reduced }: { reduced: boolean }) {
       <div className="bp-grid absolute inset-0 opacity-15" aria-hidden />
       <div className="relative mx-auto max-w-3xl px-5 text-center">
         <LockingBolt reduced={reduced} />
-        <p className="mb-3 font-mono text-[11px] tracking-[0.35em] text-accent">04 / CONTACT</p>
+        <p className="mb-3 font-mono text-[11px] tracking-[0.35em] text-accent">05 / CONTACT</p>
         <h2 className="text-3xl font-medium text-[#201c22] md:text-5xl">
           Assembly complete<span className="text-accent">.</span>
         </h2>

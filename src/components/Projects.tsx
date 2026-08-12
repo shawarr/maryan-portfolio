@@ -339,7 +339,7 @@ export default function Projects() {
     <section id="projects" className="relative mx-auto max-w-7xl px-5 py-28 md:px-8">
       <div className="mb-12 flex items-end justify-between">
         <div>
-          <p className="mb-3 font-mono text-[11px] tracking-[0.35em] text-accent">02 / PROJECTS</p>
+          <p className="mb-3 font-mono text-[11px] tracking-[0.35em] text-accent">03 / PROJECTS</p>
           <h2 className="text-3xl font-medium text-[#201c22] md:text-4xl">
             Build log<span className="text-accent">.</span>
           </h2>

@@ -37,7 +37,9 @@ export const ABOUT = {
     { k: 'CLASS OF', v: '2027' }, // PLACEHOLDER
     { k: 'GPA', v: '3.97 / 4.0' },
     { k: 'INTERESTS', v: 'CAD · FEA · AEROSPACE · ROBOTICS' },
-    { k: 'STATUS', v: 'OPEN TO APPRENTICESHIPS' },
+    /* An 8-month placement is a graduation requirement, not a vague
+       availability — say the duration so an employer can answer yes or no. */
+    { k: 'SEEKING', v: '8-MONTH APPRENTICESHIP (DEGREE REQ.)' },
   ],
   /* Calibration gauges — value is 0–100 */
   gauges: [
@@ -46,6 +48,41 @@ export const ABOUT = {
     { label: 'PROTOTYPING', value: 86 },
   ],
 }
+
+export type Experience = {
+  id: string
+  role: string
+  org: string
+  location: string
+  date: string
+  summary: string
+  /* Lead with work done, not work observed — it is the first thing an
+     employer reads and it is what they are scanning for. */
+  points: string[]
+  /* letter of experience, also listed under CERTIFICATES */
+  file?: string
+}
+
+export const EXPERIENCE: Experience[] = [
+  {
+    id: 'zain-2025',
+    role: 'Engineering Intern — Electromechanical',
+    org: 'Zain Jordan',
+    location: 'AMMAN, JO',
+    date: 'JUL – AUG 2025',
+    summary:
+      'Zain Youth Intern program, based with the electromechanical team responsible for the critical power and cooling infrastructure behind Zain’s data centers.',
+    points: [
+      'Calculated power capacity of UPS and rectifier systems, along with battery capacity and battery backup time for critical power applications.',
+      'Performed heating load calculations for two data center rooms in HAP, based on real measured electrical loads.',
+      'Studied and applied maintenance bypass operations and redundancy principles in backup power systems.',
+      'Researched and delivered presentations on electrical systems and energy calculations.',
+      'Shadowed electromechanical engineers across Zain’s data centers, covering UPS systems, rectifiers, batteries, chillers, Evapco units, pumps, generators and fire protection systems.',
+      'Completed a two-week training program at The Bunker, Zain’s underground data center and disaster recovery site.',
+    ],
+    file: '/certificates/cert-07.pdf',
+  },
+]
 
 export type ProjectMedia = {
   type: 'image' | 'video' | 'model'
@@ -549,7 +586,8 @@ export const CERTIFICATES: Certificate[] = [
 
 export const NAV = [
   { id: 'about', label: 'ABOUT', num: '01' },
-  { id: 'projects', label: 'PROJECTS', num: '02' },
-  { id: 'skills', label: 'TOOLING', num: '03' },
-  { id: 'contact', label: 'CONTACT', num: '04' },
+  { id: 'experience', label: 'EXPERIENCE', num: '02' },
+  { id: 'projects', label: 'PROJECTS', num: '03' },
+  { id: 'skills', label: 'TOOLING', num: '04' },
+  { id: 'contact', label: 'CONTACT', num: '05' },
 ]
