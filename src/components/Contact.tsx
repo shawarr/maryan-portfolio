@@ -87,7 +87,7 @@ export default function Contact({ reduced }: { reduced: boolean }) {
               a.remove()
             }}
           >
-            MARYAN BAKIR RESUME ↓
+            RESUME.PDF ↓
           </MagneticButton>
           <MagneticButton href={IDENTITY.linkedin}>LINKEDIN</MagneticButton>
         </div>

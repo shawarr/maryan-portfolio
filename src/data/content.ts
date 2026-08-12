@@ -17,7 +17,9 @@ export const IDENTITY = {
   /* PLACEHOLDER — no public GitHub link yet */
   github: 'https://github.com/your-handle',
   /* The file itself is named "Maryan Bakir - CV.pdf" in /public so it saves under that
-     name even if the browser ignores the download attribute (%20 = a space in a URL). */
+     name even if the browser ignores the download attribute (%20 = a space in a URL).
+     There is deliberately no /resume.pdf any more: it existed alongside this for a
+     while and anyone reaching it downloaded a file called plain "resume". */
   resumeUrl: '/Maryan%20Bakir%20-%20CV.pdf',
   resumeFileName: 'Maryan Bakir - CV.pdf', // what it saves as on the visitor's computer
 }
