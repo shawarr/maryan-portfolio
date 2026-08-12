@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="System pipeline: symptom interview feeds a propositional logic knowledge base to reach a diagnosis; if hyperglycemia or hypoglycemia is found, spoken health data is parsed into seven clinical values and passed to a neural network that returns a dose adjustment.">
+  <!-- Pipeline diagram for PRJ-006. Drawn to the site's own tokens:
+       ink #ffffff, panel #faf6f8, line #e7dfe4, fog #6b6470, accent #db2777,
+       blueprint #6b7280. Fonts must be generic families — an SVG loaded
+       through an <img> cannot reach the page's webfonts. -->
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#6b7280"/>
+    </marker>
+    <marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#db2777"/>
+    </marker>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0 H0 V40" fill="none" stroke="#e7dfe4" stroke-width="1"/>
+    </pattern>
+    <style>
+      .t  { font-family: ui-monospace,'SF Mono',Menlo,Consolas,monospace; }
+      .hd { font-size:34px; font-weight:600; fill:#201c22; letter-spacing:1.5px; }
+      .sb { font-size:19px; fill:#6b6470; letter-spacing:1px; }
+      .lb { font-size:19px; fill:#6b7280; letter-spacing:2.5px; }
+      .st { font-size:20px; fill:#db2777; letter-spacing:2.5px; font-weight:600; }
+      .ti { font-size:24px; fill:#6b6470; letter-spacing:4px; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#ffffff"/>
+  <rect width="1600" height="1000" fill="url(#grid)" opacity="0.55"/>
+
+  <text x="70" y="72" class="t ti">PRJ-006 — SYSTEM PIPELINE</text>
+  <line x1="70" y1="96" x2="1530" y2="96" stroke="#e7dfe4" stroke-width="2"/>
+
+  <!-- ============ STAGE 1: symbolic diagnosis ============ -->
+  <text x="70" y="158" class="t st">01 — SYMBOLIC DIAGNOSIS</text>
+
+  <g>
+    <rect x="70" y="180" width="320" height="150" fill="#faf6f8" stroke="#e7dfe4" stroke-width="2"/>
+    <text x="96" y="238" class="t hd">SYMPTOM</text>
+    <text x="96" y="276" class="t hd">INTERVIEW</text>
+    <text x="96" y="308" class="t sb">10 QUESTIONS · SPOKEN</text>
+  </g>
+  <line x1="390" y1="255" x2="440" y2="255" stroke="#6b7280" stroke-width="2" marker-end="url(#a)"/>
+
+  <g>
+    <rect x="450" y="180" width="320" height="150" fill="#faf6f8" stroke="#e7dfe4" stroke-width="2"/>
+    <text x="476" y="238" class="t hd">KNOWLEDGE</text>
+    <text x="476" y="276" class="t hd">BASE</text>
+    <text x="476" y="308" class="t sb">PROPOSITIONAL LOGIC</text>
+  </g>
+  <line x1="770" y1="255" x2="820" y2="255" stroke="#6b7280" stroke-width="2" marker-end="url(#a)"/>
+
+  <g>
+    <rect x="830" y="180" width="320" height="150" fill="#faf6f8" stroke="#db2777" stroke-width="2"/>
+    <text x="856" y="238" class="t hd">DIAGNOSIS</text>
+    <text x="856" y="284" class="t sb">HYPERGLYCEMIA /</text>
+    <text x="856" y="312" class="t sb">HYPOGLYCEMIA / NEITHER</text>
+  </g>
+
+  <!-- else branch: no abnormal state found -->
+  <line x1="1150" y1="255" x2="1205" y2="255" stroke="#6b7280" stroke-width="2" marker-end="url(#a)"/>
+  <g>
+    <rect x="1215" y="195" width="315" height="120" fill="#ffffff" stroke="#e7dfe4" stroke-width="2" stroke-dasharray="7 6"/>
+    <text x="1241" y="245" class="t lb">NEITHER →</text>
+    <text x="1241" y="280" class="t sb">REFER TO CLINICIAN</text>
+  </g>
+
+  <!-- ============ carry: only continues when abnormal ============ -->
+  <path d="M990 330 V430 H230 V545" fill="none" stroke="#db2777" stroke-width="2.5" marker-end="url(#ap)"/>
+  <text x="610" y="418" class="t st" text-anchor="middle">IF HYPER- OR HYPOGLYCEMIC</text>
+
+  <!-- ============ STAGE 2: neural dose prediction ============ -->
+  <text x="70" y="600" class="t st">02 — DOSE PREDICTION</text>
+
+  <g>
+    <rect x="70" y="622" width="320" height="150" fill="#faf6f8" stroke="#e7dfe4" stroke-width="2"/>
+    <text x="96" y="680" class="t hd">SPOKEN</text>
+    <text x="96" y="718" class="t hd">HEALTH DATA</text>
+    <text x="96" y="750" class="t sb">ONE NATURAL SENTENCE</text>
+  </g>
+  <line x1="390" y1="697" x2="440" y2="697" stroke="#6b7280" stroke-width="2" marker-end="url(#a)"/>
+
+  <g>
+    <rect x="450" y="622" width="320" height="150" fill="#faf6f8" stroke="#e7dfe4" stroke-width="2"/>
+    <text x="476" y="680" class="t hd">VALUE</text>
+    <text x="476" y="718" class="t hd">EXTRACTION</text>
+    <text x="476" y="750" class="t sb">7 CLINICAL INPUTS</text>
+  </g>
+  <line x1="770" y1="697" x2="820" y2="697" stroke="#6b7280" stroke-width="2" marker-end="url(#a)"/>
+
+  <g>
+    <rect x="830" y="622" width="320" height="150" fill="#faf6f8" stroke="#e7dfe4" stroke-width="2"/>
+    <text x="856" y="680" class="t hd">NEURAL</text>
+    <text x="856" y="718" class="t hd">NETWORK</text>
+    <text x="856" y="750" class="t sb">64 · 32 · 16 · 1 (RELU)</text>
+  </g>
+  <line x1="1150" y1="697" x2="1205" y2="697" stroke="#db2777" stroke-width="2.5" marker-end="url(#ap)"/>
+
+  <g>
+    <rect x="1215" y="622" width="315" height="150" fill="#db2777"/>
+    <text x="1241" y="680" class="t hd" fill="#ffffff">ADJUSTED</text>
+    <text x="1241" y="718" class="t hd" fill="#ffffff">DOSE</text>
+    <text x="1241" y="750" class="t sb" fill="#ffffff" opacity="0.9">SPOKEN BACK TO PATIENT</text>
+  </g>
+
+  <line x1="70" y1="848" x2="1530" y2="848" stroke="#e7dfe4" stroke-width="2"/>
+  <text x="70" y="895" class="t lb">SYMBOLIC REASONING + NEURAL REGRESSION + VOICE I/O</text>
+  <text x="70" y="932" class="t sb">PYTHON · TENSORFLOW / KERAS · SPEECHRECOGNITION · PYTTSX3</text>
+  <text x="1530" y="932" class="t sb" text-anchor="end" opacity="0.8">COURSE PROTOTYPE — NOT A MEDICAL DEVICE</text>
+</svg>
