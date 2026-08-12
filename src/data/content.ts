@@ -72,6 +72,9 @@ export type Project = {
   /* Full-detail GLB converted from the project's STEP file. The card shows a
      heavily simplified twin alongside it, named <base>-preview.glb. */
   model?: string
+  /* Outward links shown as buttons in the detail view (presentation, report…).
+     Must be publicly viewable — a Canva /edit link 403s for everyone else. */
+  links?: { label: string; href: string }[]
 }
 
 /** Swap ".glb" for "-preview.glb" — the simplified twin used on project cards. */
@@ -103,20 +106,19 @@ export const PROJECTS: Project[] = [
     drawing: 'turbine',
     accent: 'accent',
     media: [
-      { type: 'image', src: '/projects/octobot/1.png' },
-      { type: 'image', src: '/projects/octobot/2.png' },
-      { type: 'image', src: '/projects/octobot/3.png' },
-      { type: 'image', src: '/projects/octobot/4.png' },
-      { type: 'image', src: '/projects/octobot/5.png' },
-      { type: 'image', src: '/projects/octobot/6.jpg' },
-      { type: 'image', src: '/projects/octobot/7.jpg' },
-      { type: 'image', src: '/projects/octobot/8.jpg' },
-      { type: 'video', src: '/projects/octobot/9.mp4', poster: '/projects/octobot/9-poster.jpg' },
-      { type: 'video', src: '/projects/octobot/10.mp4', poster: '/projects/octobot/10-poster.jpg' },
-      { type: 'video', src: '/projects/octobot/11.mp4', poster: '/projects/octobot/11-poster.jpg' },
       { type: 'model', src: '/models/octobot.glb' },
+      { type: 'image', src: '/projects/octobot/1.jpg' },
+      { type: 'image', src: '/projects/octobot/2.jpg' },
+      { type: 'image', src: '/projects/octobot/3.jpg' },
+      { type: 'image', src: '/projects/octobot/4.jpg' },
+      { type: 'image', src: '/projects/octobot/5.jpg' },
+      { type: 'image', src: '/projects/octobot/6.jpg' },
+      { type: 'video', src: '/projects/octobot/7.mp4', poster: '/projects/octobot/7-poster.jpg' },
+      { type: 'video', src: '/projects/octobot/8.mp4', poster: '/projects/octobot/8-poster.jpg' },
+      { type: 'video', src: '/projects/octobot/9.mp4', poster: '/projects/octobot/9-poster.jpg' },
     ],
     model: '/models/octobot.glb',
+    links: [{ label: 'VIEW PRESENTATION', href: 'https://canva.link/h8dgv4nuk2qpgt5' }],
   },
   {
     id: 'coffee-vending-machine',
@@ -143,9 +145,9 @@ export const PROJECTS: Project[] = [
     drawing: 'gear',
     accent: 'accent',
     media: [
-      { type: 'image', src: '/projects/coffee-vending-machine/1.png' },
-      { type: 'image', src: '/projects/coffee-vending-machine/2.jpg' },
       { type: 'model', src: '/models/coffee-vending-machine.glb' },
+      { type: 'image', src: '/projects/coffee-vending-machine/1.jpg' },
+      { type: 'image', src: '/projects/coffee-vending-machine/2.jpg' },
     ],
     model: '/models/coffee-vending-machine.glb',
   },
@@ -174,11 +176,11 @@ export const PROJECTS: Project[] = [
     drawing: 'arm',
     accent: 'accent',
     media: [
+      { type: 'model', src: '/models/adaptive-grippers.glb' },
       { type: 'image', src: '/projects/adaptive-grippers/1.png' },
       { type: 'image', src: '/projects/adaptive-grippers/2.png' },
       { type: 'video', src: '/projects/adaptive-grippers/3.mp4', poster: '/projects/adaptive-grippers/3-poster.jpg' },
       { type: 'video', src: '/projects/adaptive-grippers/4.mp4', poster: '/projects/adaptive-grippers/4-poster.jpg' },
-      { type: 'model', src: '/models/adaptive-grippers.glb' },
     ],
     model: '/models/adaptive-grippers.glb',
   },
@@ -208,7 +210,7 @@ export const PROJECTS: Project[] = [
     accent: 'accent',
     media: [
       { type: 'image', src: '/projects/rc-car/1.png' },
-      { type: 'image', src: '/projects/rc-car/2.png' },
+      { type: 'image', src: '/projects/rc-car/2.jpg' },
     ],
   },
   {
@@ -236,12 +238,10 @@ export const PROJECTS: Project[] = [
     drawing: 'bracket',
     accent: 'accent',
     media: [
-      { type: 'image', src: '/projects/sumo-2025/1.png' },
-      { type: 'image', src: '/projects/sumo-2025/2.png' },
-      { type: 'image', src: '/projects/sumo-2025/3.jpg' },
-      { type: 'image', src: '/projects/sumo-2025/4.jpg' },
-      { type: 'video', src: '/projects/sumo-2025/5.mp4', poster: '/projects/sumo-2025/5-poster.jpg' },
       { type: 'model', src: '/models/sumo-2025.glb' },
+      { type: 'image', src: '/projects/sumo-2025/1.png' },
+      { type: 'image', src: '/projects/sumo-2025/2.jpg' },
+      { type: 'video', src: '/projects/sumo-2025/3.mp4', poster: '/projects/sumo-2025/3-poster.jpg' },
     ],
     model: '/models/sumo-2025.glb',
   },
@@ -329,13 +329,13 @@ export const PROJECTS: Project[] = [
     drawing: 'bracket',
     accent: 'accent',
     media: [
+      { type: 'model', src: '/models/cutting-board.glb' },
       { type: 'image', src: '/projects/cutting-board/1.png' },
-      { type: 'image', src: '/projects/cutting-board/2.png' },
+      { type: 'image', src: '/projects/cutting-board/2.jpg' },
       { type: 'image', src: '/projects/cutting-board/3.jpg' },
       { type: 'image', src: '/projects/cutting-board/4.jpg' },
       { type: 'image', src: '/projects/cutting-board/5.jpg' },
       { type: 'image', src: '/projects/cutting-board/6.jpg' },
-      { type: 'model', src: '/models/cutting-board.glb' },
     ],
     model: '/models/cutting-board.glb',
   },
@@ -364,10 +364,10 @@ export const PROJECTS: Project[] = [
     drawing: 'bracket',
     accent: 'accent',
     media: [
+      { type: 'model', src: '/models/sumo-2024.glb' },
       { type: 'image', src: '/projects/sumo-2024/1.png' },
       { type: 'image', src: '/projects/sumo-2024/2.png' },
       { type: 'image', src: '/projects/sumo-2024/3.jpg' },
-      { type: 'model', src: '/models/sumo-2024.glb' },
     ],
     model: '/models/sumo-2024.glb',
   },
@@ -396,7 +396,7 @@ export const PROJECTS: Project[] = [
     drawing: 'arm',
     accent: 'accent',
     media: [
-      { type: 'image', src: '/projects/jansen-linkage/1.png' },
+      { type: 'image', src: '/projects/jansen-linkage/1.jpg' },
       { type: 'image', src: '/projects/jansen-linkage/2.png' },
       { type: 'image', src: '/projects/jansen-linkage/3.jpg' },
       { type: 'video', src: '/projects/jansen-linkage/4.mp4', poster: '/projects/jansen-linkage/4-poster.jpg' },

@@ -298,6 +298,24 @@ function ProjectDetail({
               </span>
             ))}
           </div>
+
+          {project.links && project.links.length > 0 && (
+            <div className="mt-6 flex flex-wrap gap-3">
+              {project.links.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  data-cursor="link"
+                  onClick={(e) => e.stopPropagation()}
+                  className="inline-flex items-center gap-2 border border-line px-4 py-2.5 font-mono text-[10px] tracking-[0.2em] text-fog transition-colors hover:border-accent hover:text-accent"
+                >
+                  {l.label} ↗
+                </a>
+              ))}
+            </div>
+          )}
         </motion.div>
       </motion.div>
     </div>

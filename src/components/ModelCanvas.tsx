@@ -2,7 +2,7 @@
    bundle is only fetched when a model actually comes into view. */
 import { useEffect, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Bounds, Center, OrbitControls, useGLTF } from '@react-three/drei'
+import { Bounds, Center, Environment, Lightformer, OrbitControls, useGLTF } from '@react-three/drei'
 import type { Group } from 'three'
 
 function Model({
@@ -65,18 +65,30 @@ export default function ModelCanvas({
       className={interactive ? '' : 'pointer-events-none'}
       gl={{ antialias: true, alpha: true, powerPreference: 'low-power' }}
     >
-      {/* explicit lights rather than drei's <Environment>, which would pull an
-          HDR map off a CDN */}
-      <ambientLight intensity={0.7} />
-      <directionalLight position={[5, 6, 4]} intensity={2.0} />
-      <directionalLight position={[-4, -2, -3]} intensity={0.6} />
+      {/* Two directional lights left some angles almost black as the model
+          turned. This wraps it in light from every side instead — the same
+          Lightformer approach the hero scene uses, which builds the
+          environment map procedurally rather than downloading an HDR. */}
+      <ambientLight intensity={0.55} />
+      <hemisphereLight args={['#fdf2f6', '#c9c3c7', 1.1]} />
+      <directionalLight position={[5, 6, 4]} intensity={1.3} color="#fff8fa" />
+      <directionalLight position={[-5, 2, -4]} intensity={0.8} color="#d6d0d4" />
+      <directionalLight position={[0, -5, 2]} intensity={0.45} />
+      <Environment resolution={128}>
+        <Lightformer intensity={1.6} position={[0, 4, 6]} scale={[10, 4, 1]} />
+        <Lightformer intensity={1.2} position={[0, 2, -6]} rotation-y={Math.PI} scale={[10, 4, 1]} />
+        <Lightformer intensity={1} color="#d6d0d4" position={[-6, 1, 0]} rotation-y={-Math.PI / 2} scale={[8, 3, 1]} />
+        <Lightformer intensity={1} color="#fff8fa" position={[6, 1, 0]} rotation-y={Math.PI / 2} scale={[8, 3, 1]} />
+        <Lightformer intensity={0.8} position={[0, 6, 0]} rotation-x={Math.PI / 2} scale={[8, 8, 1]} />
+      </Environment>
 
       {/* Bounds re-frames whatever the model's scale happens to be — STEP
           exports arrive in millimetres, metres or anything else. No `observe`:
           it would re-fit as the model turns, making the view pump in and out.
-          The card's wider margin leaves room for the silhouette at the
-          diagonal, so a spinning part never clips at the edges. */}
-      <Bounds fit clip margin={interactive ? 1.1 : 1.6}>
+          Margins are tight — the model should fill the frame. Now that it
+          turns about its own centre, the card only needs enough slack for the
+          silhouette at the diagonal, not the old generous padding. */}
+      <Bounds fit clip margin={interactive ? 0.95 : 1.18}>
         <Model src={src} spin={spin} interactive={interactive} onReady={onReady} />
       </Bounds>
 
