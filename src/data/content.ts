@@ -144,7 +144,7 @@ export const PROJECTS: Project[] = [
     accent: 'accent',
     media: [
       { type: 'image', src: '/projects/coffee-vending-machine/1.png' },
-      { type: 'image', src: '/projects/coffee-vending-machine/2.png' },
+      { type: 'image', src: '/projects/coffee-vending-machine/2.jpg' },
       { type: 'model', src: '/models/coffee-vending-machine.glb' },
     ],
     model: '/models/coffee-vending-machine.glb',
@@ -331,9 +331,9 @@ export const PROJECTS: Project[] = [
     media: [
       { type: 'image', src: '/projects/cutting-board/1.png' },
       { type: 'image', src: '/projects/cutting-board/2.png' },
-      { type: 'image', src: '/projects/cutting-board/3.png' },
-      { type: 'image', src: '/projects/cutting-board/4.png' },
-      { type: 'image', src: '/projects/cutting-board/5.png' },
+      { type: 'image', src: '/projects/cutting-board/3.jpg' },
+      { type: 'image', src: '/projects/cutting-board/4.jpg' },
+      { type: 'image', src: '/projects/cutting-board/5.jpg' },
       { type: 'image', src: '/projects/cutting-board/6.jpg' },
       { type: 'model', src: '/models/cutting-board.glb' },
     ],

@@ -2,7 +2,7 @@
    bundle is only fetched when a model actually comes into view. */
 import { useEffect, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Bounds, OrbitControls, useGLTF } from '@react-three/drei'
+import { Bounds, Center, OrbitControls, useGLTF } from '@react-three/drei'
 import type { Group } from 'three'
 
 function Model({
@@ -30,9 +30,15 @@ function Model({
     if (ref.current && !interactive) ref.current.rotation.y += dt * spin * 0.25
   })
 
+  /* <Center> shifts the geometry so its bounding-box centre sits on the group's
+     origin. Without it the model orbits the scene origin — which for a STEP
+     export is wherever the CAD origin happened to be, often well outside the
+     part — and swings out of frame instead of turning on the spot. */
   return (
     <group ref={ref}>
-      <primitive object={scene} />
+      <Center>
+        <primitive object={scene} />
+      </Center>
     </group>
   )
 }
@@ -66,8 +72,11 @@ export default function ModelCanvas({
       <directionalLight position={[-4, -2, -3]} intensity={0.6} />
 
       {/* Bounds re-frames whatever the model's scale happens to be — STEP
-          exports arrive in millimetres, metres or anything else. */}
-      <Bounds fit clip observe margin={interactive ? 1.1 : 1.35}>
+          exports arrive in millimetres, metres or anything else. No `observe`:
+          it would re-fit as the model turns, making the view pump in and out.
+          The card's wider margin leaves room for the silhouette at the
+          diagonal, so a spinning part never clips at the edges. */}
+      <Bounds fit clip margin={interactive ? 1.1 : 1.6}>
         <Model src={src} spin={spin} interactive={interactive} onReady={onReady} />
       </Bounds>
 
