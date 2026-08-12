@@ -38,8 +38,10 @@ export const ABOUT = {
     { k: 'GPA', v: '3.97 / 4.0' },
     { k: 'INTERESTS', v: 'CAD · FEA · AEROSPACE · ROBOTICS' },
     /* An 8-month placement is a graduation requirement, not a vague
-       availability — say the duration so an employer can answer yes or no. */
+       availability. Duration and start date are what let an employer answer
+       yes or no without having to write and ask. */
     { k: 'SEEKING', v: '8-MONTH APPRENTICESHIP (DEGREE REQ.)' },
+    { k: 'AVAILABLE', v: 'FROM OCTOBER 2026' },
   ],
   /* Calibration gauges — value is 0–100 */
   gauges: [
