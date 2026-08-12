@@ -70,8 +70,24 @@ export default function Contact({ reduced }: { reduced: boolean }) {
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <MagneticButton href={IDENTITY.resumeUrl} variant="solid" download={IDENTITY.resumeFileName}>
-            RESUME.PDF ↓
+          {/* Opens the CV in a browser tab AND saves a copy. The anchor itself
+              handles the viewing (a `download` attribute here would suppress
+              that); the click handler fires a second, hidden anchor that does
+              the saving, which is what carries the proper filename. */}
+          <MagneticButton
+            href={IDENTITY.resumeUrl}
+            variant="solid"
+            newTab
+            onClick={() => {
+              const a = document.createElement('a')
+              a.href = IDENTITY.resumeUrl
+              a.download = IDENTITY.resumeFileName
+              document.body.appendChild(a)
+              a.click()
+              a.remove()
+            }}
+          >
+            MARYAN BAKIR RESUME ↓
           </MagneticButton>
           <MagneticButton href={IDENTITY.linkedin}>LINKEDIN</MagneticButton>
         </div>

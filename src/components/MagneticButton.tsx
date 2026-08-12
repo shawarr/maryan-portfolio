@@ -7,6 +7,8 @@ export default function MagneticButton({
   href,
   children,
   download,
+  newTab,
+  onClick,
   variant = 'outline',
   className = '',
 }: {
@@ -14,6 +16,9 @@ export default function MagneticButton({
   children: ReactNode
   /** `true` downloads as-is; a string sets the saved filename. */
   download?: boolean | string
+  /** force a new tab for a same-origin href (external links open in one anyway) */
+  newTab?: boolean
+  onClick?: () => void
   variant?: 'outline' | 'solid'
   className?: string
 }) {
@@ -46,8 +51,9 @@ export default function MagneticButton({
       ref={ref}
       href={href}
       download={download}
-      target={href.startsWith('http') ? '_blank' : undefined}
-      rel={href.startsWith('http') ? 'noreferrer' : undefined}
+      onClick={onClick}
+      target={newTab || href.startsWith('http') ? '_blank' : undefined}
+      rel={newTab || href.startsWith('http') ? 'noreferrer' : undefined}
       data-cursor="link"
       onMouseMove={onMove}
       onMouseLeave={onLeave}
