@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type MouseEvent } from 'react'
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
 import { PROJECTS, type Project } from '../data/content'
 import TechnicalDrawing from './TechnicalDrawing'
+import ModelViewer, { previewSrc } from './ModelViewer'
 import { getLenis, usePrefersReducedMotion, useIsMobile } from '../lib/scroll'
 
 /* ---------- media gallery for the expanded detail view ---------- */
@@ -28,12 +29,26 @@ function ProjectGallery({ project, reduced, className }: { project: Project; red
   return (
     <div className={className}>
       <div className="relative aspect-[16/10] overflow-hidden bg-ink">
-        {current.type === 'video' ? (
+        {current.type === 'model' ? (
+          <ModelViewer
+            key={current.src}
+            src={current.src}
+            mode="inspect"
+            className="h-full w-full"
+            fallback={
+              <div className="flex h-full w-full items-center justify-center px-6 text-center font-mono text-[10px] tracking-[0.2em] text-ghost">
+                3D MODEL UNAVAILABLE ON THIS DEVICE
+              </div>
+            }
+          />
+        ) : current.type === 'video' ? (
           <video
             key={current.src}
             src={current.src}
+            poster={current.poster}
             controls
             playsInline
+            preload="metadata"
             className="h-full w-full object-contain"
           />
         ) : (
@@ -153,15 +168,27 @@ function ProjectCard({
         {/* drawing viewport */}
         <div className="bp-grid relative aspect-[16/10] overflow-hidden [background-size:60px_60px,60px_60px,12px_12px,12px_12px]">
           <div className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-[1.06]">
-            {project.media?.find((m) => m.type === 'image') ? (
-              <img
-                src={project.media.find((m) => m.type === 'image')!.src}
-                alt={project.title}
-                className="h-full w-full object-cover"
-              />
-            ) : (
-              <TechnicalDrawing kind={project.drawing} reduced={reduced} className="h-full w-full p-4" />
-            )}
+            {(() => {
+              const still = project.media?.find((m) => m.type === 'image')
+              /* object-contain, not cover: these renders have their backgrounds
+                 removed, so letterboxing shows the blueprint grid behind them
+                 rather than cropping the part out of frame. */
+              const image = still ? (
+                <img src={still.src} alt={project.title} className="h-full w-full object-contain" />
+              ) : (
+                <TechnicalDrawing kind={project.drawing} reduced={reduced} className="h-full w-full p-4" />
+              )
+              return project.model ? (
+                <ModelViewer
+                  src={previewSrc(project.model)}
+                  mode="card"
+                  className="h-full w-full"
+                  fallback={image}
+                />
+              ) : (
+                image
+              )
+            })()}
           </div>
           {/* hover annotation overlay */}
           <div className="absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-ink via-ink/85 to-transparent px-5 pb-4 pt-10 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">

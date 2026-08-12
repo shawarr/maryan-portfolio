@@ -45,7 +45,12 @@ export const ABOUT = {
   ],
 }
 
-export type ProjectMedia = { type: 'image' | 'video'; src: string }
+export type ProjectMedia = {
+  type: 'image' | 'video' | 'model'
+  src: string
+  /* still frame shown before a video is played, so the slot isn't a black box */
+  poster?: string
+}
 
 export type Project = {
   id: string
@@ -64,6 +69,9 @@ export type Project = {
   /* real photos/renders/clips — falls back to the placeholder TechnicalDrawing
      SVG when omitted */
   media?: ProjectMedia[]
+  /* Full-detail GLB converted from the project's STEP file. The card shows a
+     heavily simplified twin alongside it, named <base>-preview.glb. */
+  model?: string
 }
 
 export const PROJECTS: Project[] = [
@@ -92,10 +100,20 @@ export const PROJECTS: Project[] = [
     drawing: 'turbine',
     accent: 'accent',
     media: [
-      { type: 'image', src: '/projects/octobot/1.jpg' },
-      { type: 'image', src: '/projects/octobot/2.jpg' },
-      { type: 'image', src: '/projects/octobot/3.jpg' },
+      { type: 'image', src: '/projects/octobot/1.png' },
+      { type: 'image', src: '/projects/octobot/2.png' },
+      { type: 'image', src: '/projects/octobot/3.png' },
+      { type: 'image', src: '/projects/octobot/4.png' },
+      { type: 'image', src: '/projects/octobot/5.png' },
+      { type: 'image', src: '/projects/octobot/6.jpg' },
+      { type: 'image', src: '/projects/octobot/7.jpg' },
+      { type: 'image', src: '/projects/octobot/8.jpg' },
+      { type: 'video', src: '/projects/octobot/9.mp4', poster: '/projects/octobot/9-poster.jpg' },
+      { type: 'video', src: '/projects/octobot/10.mp4', poster: '/projects/octobot/10-poster.jpg' },
+      { type: 'video', src: '/projects/octobot/11.mp4', poster: '/projects/octobot/11-poster.jpg' },
+      { type: 'model', src: '/models/octobot.glb' },
     ],
+    model: '/models/octobot.glb',
   },
   {
     id: 'coffee-vending-machine',
@@ -122,9 +140,11 @@ export const PROJECTS: Project[] = [
     drawing: 'gear',
     accent: 'accent',
     media: [
-      { type: 'image', src: '/projects/coffee-vending-machine/1.jpg' },
-      { type: 'image', src: '/projects/coffee-vending-machine/2.jpg' },
+      { type: 'image', src: '/projects/coffee-vending-machine/1.png' },
+      { type: 'image', src: '/projects/coffee-vending-machine/2.png' },
+      { type: 'model', src: '/models/coffee-vending-machine.glb' },
     ],
+    model: '/models/coffee-vending-machine.glb',
   },
   {
     id: 'adaptive-grippers',
@@ -151,9 +171,13 @@ export const PROJECTS: Project[] = [
     drawing: 'arm',
     accent: 'accent',
     media: [
-      { type: 'image', src: '/projects/adaptive-grippers/1.jpg' },
-      { type: 'image', src: '/projects/adaptive-grippers/2.jpg' },
+      { type: 'image', src: '/projects/adaptive-grippers/1.png' },
+      { type: 'image', src: '/projects/adaptive-grippers/2.png' },
+      { type: 'video', src: '/projects/adaptive-grippers/3.mp4', poster: '/projects/adaptive-grippers/3-poster.jpg' },
+      { type: 'video', src: '/projects/adaptive-grippers/4.mp4', poster: '/projects/adaptive-grippers/4-poster.jpg' },
+      { type: 'model', src: '/models/adaptive-grippers.glb' },
     ],
+    model: '/models/adaptive-grippers.glb',
   },
   {
     id: 'rc-car',
@@ -180,8 +204,8 @@ export const PROJECTS: Project[] = [
     drawing: 'gear',
     accent: 'accent',
     media: [
-      { type: 'image', src: '/projects/rc-car/1.jpg' },
-      { type: 'image', src: '/projects/rc-car/2.jpg' },
+      { type: 'image', src: '/projects/rc-car/1.png' },
+      { type: 'image', src: '/projects/rc-car/2.png' },
     ],
   },
   {
@@ -209,9 +233,14 @@ export const PROJECTS: Project[] = [
     drawing: 'bracket',
     accent: 'accent',
     media: [
-      { type: 'image', src: '/projects/sumo-2025/1.jpg' },
-      { type: 'image', src: '/projects/sumo-2025/2.jpg' },
+      { type: 'image', src: '/projects/sumo-2025/1.png' },
+      { type: 'image', src: '/projects/sumo-2025/2.png' },
+      { type: 'image', src: '/projects/sumo-2025/3.jpg' },
+      { type: 'image', src: '/projects/sumo-2025/4.jpg' },
+      { type: 'video', src: '/projects/sumo-2025/5.mp4', poster: '/projects/sumo-2025/5-poster.jpg' },
+      { type: 'model', src: '/models/sumo-2025.glb' },
     ],
+    model: '/models/sumo-2025.glb',
   },
   {
     id: 'insulin-app',
@@ -297,9 +326,15 @@ export const PROJECTS: Project[] = [
     drawing: 'bracket',
     accent: 'accent',
     media: [
-      { type: 'image', src: '/projects/cutting-board/1.jpg' },
-      { type: 'image', src: '/projects/cutting-board/2.jpg' },
+      { type: 'image', src: '/projects/cutting-board/1.png' },
+      { type: 'image', src: '/projects/cutting-board/2.png' },
+      { type: 'image', src: '/projects/cutting-board/3.png' },
+      { type: 'image', src: '/projects/cutting-board/4.png' },
+      { type: 'image', src: '/projects/cutting-board/5.png' },
+      { type: 'image', src: '/projects/cutting-board/6.jpg' },
+      { type: 'model', src: '/models/cutting-board.glb' },
     ],
+    model: '/models/cutting-board.glb',
   },
   {
     id: 'sumo-2024',
@@ -325,7 +360,13 @@ export const PROJECTS: Project[] = [
     tools: ['Arduino Uno', 'Sheet Metal Fab', 'IR Sensors', 'H-Bridge Drivers'],
     drawing: 'bracket',
     accent: 'accent',
-    media: [{ type: 'image', src: '/projects/sumo-2024/1.jpg' }],
+    media: [
+      { type: 'image', src: '/projects/sumo-2024/1.png' },
+      { type: 'image', src: '/projects/sumo-2024/2.png' },
+      { type: 'image', src: '/projects/sumo-2024/3.jpg' },
+      { type: 'model', src: '/models/sumo-2024.glb' },
+    ],
+    model: '/models/sumo-2024.glb',
   },
   {
     id: 'jansen-linkage',
@@ -351,7 +392,12 @@ export const PROJECTS: Project[] = [
     tools: ['Eight-Bar Linkage', 'Laser Cutting', 'Kinematic Design', 'Mechanism Optimization'],
     drawing: 'arm',
     accent: 'accent',
-    media: [{ type: 'image', src: '/projects/jansen-linkage/1.jpg' }],
+    media: [
+      { type: 'image', src: '/projects/jansen-linkage/1.png' },
+      { type: 'image', src: '/projects/jansen-linkage/2.png' },
+      { type: 'image', src: '/projects/jansen-linkage/3.jpg' },
+      { type: 'video', src: '/projects/jansen-linkage/4.mp4', poster: '/projects/jansen-linkage/4-poster.jpg' },
+    ],
   },
   {
     id: 'el-huevo',
@@ -378,9 +424,9 @@ export const PROJECTS: Project[] = [
     drawing: 'bracket',
     accent: 'accent',
     media: [
-      { type: 'image', src: '/projects/el-huevo/1.jpg' },
-      { type: 'image', src: '/projects/el-huevo/2.jpg' },
-      { type: 'video', src: '/projects/el-huevo/video.mp4' },
+      { type: 'image', src: '/projects/el-huevo/1.png' },
+      { type: 'image', src: '/projects/el-huevo/2.png' },
+      { type: 'video', src: '/projects/el-huevo/3.mp4', poster: '/projects/el-huevo/3-poster.jpg' },
     ],
   },
 ]

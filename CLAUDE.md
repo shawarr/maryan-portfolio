@@ -20,7 +20,14 @@ Assume no prior knowledge of any of this when helping them:
 
 ## How this is deployed
 
-Live at **https://mepnahportfolio.shawar.xyz** (TLS via certbot, auto-renews).
+Live at **https://maryanbakir.com** (TLS via certbot, auto-renews). This is the real,
+canonical address — use it in anything user-facing.
+
+Three older names (`mepnahportfolio.shawar.xyz`, `maryanbakir.shawar.xyz`,
+`maryan.shawar.xyz`) still resolve to the same container. They are duplicates as far as
+search engines are concerned, which is why `index.html` carries a canonical tag pointing
+at maryanbakir.com — don't remove it. Ideally the three would 301-redirect to the real
+domain, but that needs root on the host nginx, which this user does not have.
 
 - Server: the "ahmad" box, reachable to Claude Code sessions running there as user `maryan`
   (no sudo except one narrowly-scoped script, see below).
@@ -49,6 +56,33 @@ is failing or someone asks you to "just push the update"):
 ```
 
 This does `git pull --ff-only`, `npm install`, `npm run build`, `docker restart mepnahportfolio`.
+
+## Search engines
+
+- `public/robots.txt` + `public/sitemap.xml`; `index.html` carries the title, description,
+  canonical, Open Graph and JSON-LD (`WebSite` + `Person`). The `WebSite` name is what
+  stops Google printing a lowercase site name derived from the domain.
+- **IndexNow key**: `public/b8eb15e5362058bd2e1918b6c9c8e629.txt`. Don't regenerate it —
+  the filename *is* the key and it must stay reachable at the domain root. Notify Bing
+  (and so DuckDuckGo) of updates with the curl command in commit `95d5639`.
+- Google does not support IndexNow; it needs Search Console, which requires Maryan's
+  own Google account.
+
+## Media pipeline (photos, video, CAD)
+
+Originals live in `~/portfolio_drive`, outside the repo. Only processed output is committed.
+
+- **Photos** → `public/projects/<id>/<n>.png|jpg`, numbered in display order. Backgrounds
+  are removed with rembg on CAD renders and isolated objects, but deliberately **not** on
+  scene shots (expo stand, robot in its arena, underwater) — the cutout leaves debris and
+  throws away the context — nor on screenshots and plots.
+- **Video** → re-encoded to H.264/AAC MP4 with `+faststart`, plus an `<n>-poster.jpg`
+  still. Source `.mov`/`.avi` will not play in browsers, so never copy them across raw.
+- **CAD** → STEP converted to GLB with `cascadio`, then compressed with
+  `@gltf-transform/cli` using **meshopt** (not Draco: drei's `useGLTF` enables the meshopt
+  decoder by default, so nothing loads from a CDN). Two files per project:
+  `<id>.glb` full detail for the detail view, and `<id>-preview.glb` simplified to under
+  400 KB for the spinning card preview.
 
 ## Access model (read before touching permissions)
 
