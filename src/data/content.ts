@@ -345,6 +345,19 @@ export const PROJECTS: Project[] = [
       { type: 'image', src: '/projects/airfoil-cfd/2.jpg' },
     ],
   },
+  /* ==========================================================================
+     TEMPORARILY HIDDEN — MULTI-FUNCTIONAL CUTTING BOARD (was PRJ-008)
+     Pulled from the live site on 2026-08-17 at Maryan's request: the design
+     still needs adjustments. Nothing was deleted — the photos
+     (public/projects/cutting-board/) and the 3D models
+     (public/models/cutting-board.glb + -preview.glb) are all still in place.
+
+     TO PUT IT BACK: delete this comment block and the closing one below, then
+     renumber so the sequence has no gap — this entry becomes PRJ-008 again and
+     sumo-2024 / jansen-linkage / el-huevo shift back to 009 / 010 / 011.
+     Re-upload the updated CAD first if the geometry changed.
+     ========================================================================== */
+  /*
   {
     id: 'cutting-board',
     index: 'PRJ-008',
@@ -380,9 +393,10 @@ export const PROJECTS: Project[] = [
     ],
     model: '/models/cutting-board.glb',
   },
+  */
   {
     id: 'sumo-2024',
-    index: 'PRJ-009',
+    index: 'PRJ-008',
     title: 'HTU ANNUAL SUMO ROBOTS COMPETITION — 2024',
     course: 'HTU Sumo Robotics Competition',
     year: '2024',
@@ -414,7 +428,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'jansen-linkage',
-    index: 'PRJ-010',
+    index: 'PRJ-009',
     title: 'JANSEN LINKAGE PLANAR MECHANISM',
     course: 'Mechanical Principles',
     year: '2023–2024',
@@ -445,7 +459,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'el-huevo',
-    index: 'PRJ-011',
+    index: 'PRJ-010',
     title: 'EL HUEVO: AIR-FRYER INSPIRED EGG COOKER',
     course: 'Engineering Design',
     year: '2022–2023',
